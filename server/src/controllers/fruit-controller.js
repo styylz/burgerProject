@@ -36,50 +36,72 @@ const createFruit = async(req,res) => {
   }
 }
 
-const deleteFruit = (req,res)=> {
+const deleteFruit = async(req,res)=> {
   const { id } = req.params;
-  const ii = fruits.findIndex(x => x.id === id);
-  if (ii >= 0) {
-    const [deletedFruit] = fruits.splice(ii, 1);
-    res.status(200).json(deletedFruit);
-  } else {
-    res.status(404).json({
-      message: 'Vaisus nerastas'
-    })
-  }
+ try {
+   const fruitDoc = await FruitModel.findByIdAndDelete(id)
+   const fruit = new FruitViewModel(fruitDoc)
+   res.status(200).json(fruit)
+ } catch (error) {
+   console.log(error.message)
+   res.status(400).json({
+     message: 'vaisius nerastas'
+   })
+ }
 }
 
-const updateFruit = (req,res) => {
+const updateFruit = async (req, res) => {
   const { id } = req.params;
   const { name, price } = req.body;
-  const fruit = fruits.find(x => x.id === id);
-  if (fruit) {
-    if (name) fruit.name = name;
-    if (price) fruit.price = price;
-    res.status(200).json(fruit);
-  }
-  else {
-    res.status(404).json({ message: 'Vaisus nerastas' });
-  }
-}
+  try {
+    await FruitModel.findById(id);
 
-const replaceFruit =(req,res)=>{
-  const { id } = req.params;
-  const { name, price } = req.body;
-  const fruit = fruits.find(x => x.id === id);
-  if (fruit) {
-    if (name && price) {
-      fruit.name = name;
-      fruit.price = price;
+    try {
+      const fruitDoc = await FruitModel.findByIdAndUpdate(
+        id,
+        { name, price },
+        { new: true }
+      );
+      const fruit = new FruitViewModel(fruitDoc);
       res.status(200).json(fruit);
-    } else {
-      res.status(400).json({ message: 'Nepakanka duomenų' });
+    } catch (error) {
+      res.status(400).json({ message: 'Blogi parametrai' });
     }
+
+  } catch (error) {
+    res.status(404).json({ message: 'Vaisius nerastas' });
   }
-  else {
-    res.status(404).json({ message: 'Vaisus nerastas' });
+};
+
+const replaceFruit = async (req, res) => {
+  const { id } = req.params;
+  const { name, price } = req.body;
+  try {
+    await FruitModel.findById(id);
+
+    try {
+      if (name && price) {
+        const fruitDoc = await FruitModel.findByIdAndUpdate(
+          { _id: id },
+          { name, price },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+        const fruit = new FruitViewModel(fruitDoc);
+        res.status(200).json(fruit);
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      res.status(400).json({ message: 'Blogi parametrai' });
+    }
+
+  } catch (error) {
+    res.status(404).json({ message: 'Vaisius nerastas' });
   }
-}
+};
 
 module.exports = {
   getFruits,
