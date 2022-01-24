@@ -1,28 +1,39 @@
 const { v4: generateId } = require('uuid');
+const FruitModel = require('../models/fruit-model')
+const FruitViewModel =require('../view-models/fruit-view-model')
 
-const fruits = [
-  { id: '1', name: 'Apple', price: 20.89 },
-  { id: '2', name: 'Pear', price: 28.19 },
-  { id: '3', name: 'Banana', price: 12.99 },
-];
 
-const getFruits = (req,res) => {
-  res.status(200).json({fruits})
+const getFruits = async(req,res) => {
+  const fruitDoc = await FruitModel.find()
+  res.status(200).json({
+    fruits: fruitDoc.map(fruit => new FruitViewModel(fruit))
+  })
 };
 
-const getFruit = (req, res) => {
+const getFruit = async (req, res) => {
   const { id } = req.params;
-  res.status(200).json(fruits.find(x => x.id === id))
+  try {
+    const fruitDoc = await FruitModel.findById(id)
+    const fruit = new FruitViewModel(fruitDoc)
+    res.status(200).json(fruit)
+  } catch (error) {
+    res.status(400).json ({
+      message: `Elementas nerastas su id: ${id}`
+    })
+  }
 }
 
-const createFruit = (req,res) => {
+const createFruit = async(req,res) => {
   const { name, price } = req.body;
-  fruits.push({
-    id: generateId(),
-    name,
-    price
-  })
-  res.send('Vaisius sėkmingas įdėtas į prekybą');
+  const newFruit = await FruitModel({name, price})
+  try {
+    await newFruit.save()
+    res.status(200).json(new FruitViewModel(newFruit));
+  } catch (error) {
+    res.status(400).json({
+      message: `Klaida: jau yra vaisius su tokiu pavadinimu ${newFruit.name}`
+    })
+  }
 }
 
 const deleteFruit = (req,res)=> {
