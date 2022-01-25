@@ -1,9 +1,8 @@
-const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator')
-const validator = require('validator')
+const Mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 const { isEmail } = require('validator');
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Mongoose.Schema({
   email: {
     type: 'string',
     required: true,
@@ -23,25 +22,25 @@ const userSchema = new mongoose.Schema({
       { validator: (value) => /^.*[A-ZĄČĘĖĮŠŲŪŽ].*$/.test(value), message: 'At least one capital letter' },
     ],
   },
- role: {
-   type: 'string',
-   enum: ['USER', 'ADMIN'],
-   default: 'USER'
- },
- name: {
-   type: 'string',
-   required: true,
- },
- surname: {
-   type: 'string',
-   required: true
- },
+  role: {
+    type: 'string',
+    enum: ['USER', 'ADMIN'],
+    default: 'USER',
+  },
+  name: {
+    type: 'string',
+    required: true,
+  },
+  surname: {
+    type: 'string',
+    required: true,
+  },
 }, {
-  timestamps: true
+  timestamps: true,
 });
 
-userSchema.plugin(uniqueValidator)
+userSchema.plugin(uniqueValidator);
 
-const FruitModel = mongoose.model('User', userSchema)
+const UserModel = Mongoose.model('User', userSchema);
 
-module.exports = FruitModel
+module.exports = UserModel;
