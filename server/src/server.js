@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose')
 require('dotenv').config();
 const fruitRouter = require('./routes/fruit-router')
+const authRouter = require('./routes/auth-router')
 
 const server = express();
 const {SERVER_PORT, DB_CONNECTION} = process.env;
@@ -16,7 +17,7 @@ server.use(express.json())
 //Response handlers
 //Kuomet url prasideda '/api/fruits' naudok fruitRouteri
 server.use('/api/fruits',fruitRouter)
- mongoose.connect(DB_CONNECTION)
+server.use('/api/auth', authRouter)
 
  server.listen(SERVER_PORT, ()=>{
    (async () => {
