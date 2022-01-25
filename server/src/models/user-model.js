@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema({
       { validator: (value) => /^.*[A-ZĄČĘĖĮŠŲŪŽ].*$/.test(value), message: 'At least one capital letter' },
     ],
   },
+ role: {
+   type: 'string',
+   enum: ['USER', 'ADMIN'],
+   default: 'USER'
+ },
  name: {
    type: 'string',
    required: true,
