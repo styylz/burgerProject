@@ -15,15 +15,17 @@ const Register = () => (
       position: 'relative',
     }}
   >
-    <Box sx={{
-      position: 'absolute',
-      top: '20%',
-      left: '80px',
-      width: '60%',
-      height: '350px',
-      display: 'flex',
-      flexDirection: 'column',
-    }}
+    <Box
+      component="form"
+      sx={{
+        position: 'absolute',
+        top: '20%',
+        left: '80px',
+        width: '60%',
+        height: '350px',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
     >
       <Box sx={{ mb: 1.5 }}>
         <Typography variant="h3" sx={{ textAlign: 'left' }}> LOREM1</Typography>
@@ -37,7 +39,7 @@ const Register = () => (
         {/* <Typography sx={{ fontSize: '12px' }} variant="p"> Forgot Password?</Typography> */}
       </Box>
       <Box sx={{ mb: 1 }}>
-        <Button fullWidth variant="contained" sx={{ backgroundColor: yellowCol }}>Contained</Button>
+        <Button fullWidth type="submit" variant="contained" sx={{ backgroundColor: yellowCol }}>Contained</Button>
       </Box>
       <Typography sx={{ textAlign: 'center' }} variant="p"> New to BBB? Join now </Typography>
 
