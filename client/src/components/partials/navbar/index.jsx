@@ -23,7 +23,7 @@ const pages = [
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const StyledNavLink = styled(NavLink)(({ theme }) => ({
-  color: theme.palette.common.white,
+  color: theme.palette.common.black,
   textDecoration: 'none',
   '&.active': {
     borderBottom: `1px solid ${theme.palette.common.white}`,
