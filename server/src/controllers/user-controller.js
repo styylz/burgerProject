@@ -1,6 +1,5 @@
 const UserModel = require('../models/user-model')
 const UserViewModel = require('../view-models/user-view-model')
-const jwt = require('jsonwebtoken')
 
 const getUsers = async(req,res) => {
   const userDocs = await UserModel.find()
