@@ -8,12 +8,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from './components/partials/navbar';
 import SignIn from './pages/sign-in-page';
 import Register from './pages/register-page';
+import Home from './pages/home-page';
 
 const App = () => (
   <CssBaseline>
     <RouterProvider>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Navbar />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<Register />} />
       </Routes>
