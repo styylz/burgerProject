@@ -1,3 +1,4 @@
+/*eslint-disable */
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,9 +12,23 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { styled } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
-const pages = ['Home', 'Burgers', 'Blog'];
+const pages = [
+  {title:"Home", link:'/'},
+  {title:"Burgers", link:'*'},
+  {title:"Login", link:'/login'}
+]
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const StyledNavLink = styled(NavLink)(({ theme }) => ({
+  color: theme.palette.common.white,
+  textDecoration: 'none',
+  '&.active': {
+    borderBottom: `1px solid ${theme.palette.common.white}`,
+  },
+}));
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -72,9 +87,9 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map(({title}) => (
+                <MenuItem key={title} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{title}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -85,26 +100,21 @@ const Navbar = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
           >
-            LOGO
+            LOREM
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map(({title, link}) => (
               <Button
-                key={page}
+                key={title}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                <StyledNavLink to={link}>{title}</StyledNavLink>
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
