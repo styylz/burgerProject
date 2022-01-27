@@ -70,8 +70,8 @@ const LoginPage = () => {
 
   return (
     <AuthForm
-      linkTo={routes.RegisterPage}
-      linkTitle="Neturite paskyros? Registruokitės"
+      linkTo={routes.SignUpPage}
+      linkTitle="New to BBB? Join now"
       loading={isSubmitting}
       isValid={isValid && dirty}
       onSubmit={handleSubmit}
@@ -81,13 +81,13 @@ const LoginPage = () => {
       </Alert>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Box sx={{ mb: 1.5 }}>
+          <Box sx={{ mb: 2 }}>
             <Typography variant="h3" sx={{ textAlign: 'left' }}> LOREM</Typography>
             <Typography variant="p" sx={{ fontSize: '12px' }}> Stay updated on your burgers world</Typography>
           </Box>
           <TextField
             name="email"
-            variant="outlined"
+            variant="standard"
             label="El. paštas"
             value={values.email}
             error={touched.email && Boolean(errors.email)}
@@ -103,7 +103,7 @@ const LoginPage = () => {
         <Grid item xs={12} sx={{ mb: 4 }}>
           <TextField
             name="password"
-            variant="outlined"
+            variant="standard"
             label="Slaptažodis"
             type="password"
             value={values.password}

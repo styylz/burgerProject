@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import {
   Container,
@@ -21,14 +20,14 @@ const AuthForm = ({
   <Container
     maxWidth="xs"
     component="main"
-    sx={{ pt: '7vh' }}
+    sx={{ pt: '2vh' }}
   >
     <Box component="form" onSubmit={onSubmit}>
       <Box sx={{
-        mb: 3,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        mb: 3,
       }}
       >
         <Typography component="h1" variant="h5">
@@ -43,9 +42,9 @@ const AuthForm = ({
           : title
         }
       </Button>
-      {/* <Link to={linkTo}>
+      <Link sx={{ textDecoration: 'none' }} to={linkTo}>
         {linkTitle}
-      </Link> */}
+      </Link>
     </Box>
   </Container>
 );

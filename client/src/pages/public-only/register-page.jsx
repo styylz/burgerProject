@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import {
   TextField,
-  FormControlLabel,
-  Checkbox,
   Grid,
   InputAdornment,
   CircularProgress,
@@ -139,7 +137,7 @@ const RegisterPage = () => {
 
   return (
     <AuthForm
-      title="Registruotis"
+      title="Stay updated on your burgers world"
       linkTo={routes.LoginPage}
       linkTitle="Jau turite paskyrą? Prisijunkite"
       onSubmit={handleSubmit}
@@ -158,7 +156,7 @@ const RegisterPage = () => {
             helperText={touched.name && errors.name}
             disabled={isSubmitting}
             fullWidth
-            variant="outlined"
+            variant="standard"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -172,7 +170,7 @@ const RegisterPage = () => {
             helperText={touched.surname && errors.surname}
             disabled={isSubmitting}
             fullWidth
-            variant="outlined"
+            variant="standard"
           />
         </Grid>
         <Grid item xs={12}>
@@ -186,7 +184,7 @@ const RegisterPage = () => {
             helperText={touched.email && errors.email}
             disabled={isSubmitting}
             fullWidth
-            variant="outlined"
+            variant="standard"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -207,7 +205,7 @@ const RegisterPage = () => {
             helperText={touched.password && errors.password}
             disabled={isSubmitting}
             fullWidth
-            variant="outlined"
+            variant="standard"
             type="password"
           />
         </Grid>
@@ -222,22 +220,8 @@ const RegisterPage = () => {
             helperText={touched.passwordConfirmation && errors.passwordConfirmation}
             disabled={isSubmitting}
             fullWidth
-            variant="outlined"
+            variant="standard"
             type="password"
-          />
-        </Grid>
-        <Grid item sx={{ mb: 2 }} xs={12}>
-          <FormControlLabel
-            control={(
-              <Checkbox
-                name="subscribed"
-                onChange={handleChange}
-                checked={values.subscribed}
-                disabled={isSubmitting}
-                color="primary"
-              />
-                )}
-            label="Noriu gauti su rinkodara susijusius pranešimus"
           />
         </Grid>
       </Grid>
