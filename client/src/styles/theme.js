@@ -4,13 +4,9 @@ const theme = createTheme({
   palette: {
     primary: {
       main: '#FFFEFB',
-      common: '#00000',
-    },
-    secondary: {
-      main: '#d2583e',
     },
     background: {
-      default: '#00000',
+      default: '#FFC20A',
     },
   },
 
@@ -28,7 +24,7 @@ const theme = createTheme({
       '"Segoe UI Symbol"',
     ].join(','),
     body1: {
-      color: 'red',
+      color: 'black',
     },
   },
 });

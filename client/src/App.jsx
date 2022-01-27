@@ -1,30 +1,19 @@
 import React from 'react';
-import {
-  BrowserRouter as RouterProvider,
-  Routes,
-  Route,
-} from 'react-router-dom';
+
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
+import { Provider as ReduxProvider } from 'react-redux';
 import { lightTheme } from './styles/theme';
-import Navbar from './components/partials/navbar';
-import SignIn from './pages/sign-in-page';
-import Register from './pages/register-page';
-import Home from './pages/home-page';
+import store from './store';
+import PageRouter from './routing/page-router';
 
 const App = () => (
-  <ThemeProvider theme={lightTheme}>
-    <CssBaseline />
-    <RouterProvider>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<SignIn />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </RouterProvider>
-  </ThemeProvider>
-
+  <ReduxProvider store={store}>
+    <ThemeProvider theme={lightTheme}>
+      <CssBaseline />
+      <PageRouter />
+    </ThemeProvider>
+  </ReduxProvider>
 );
 
 export default App;
