@@ -137,18 +137,18 @@ const RegisterPage = () => {
 
   return (
     <AuthForm
-      title="Stay updated on your burgers world"
+      title="Sign Up"
       linkTo={routes.LoginPage}
-      linkTitle="Jau turite paskyrą? Prisijunkite"
+      linkTitle="Already Have An Account? Sign In"
       onSubmit={handleSubmit}
       isValid={isValid && dirty}
       loading={isSubmitting}
     >
       <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             name="name"
-            label="Vardas"
+            label="Name"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.name}
@@ -159,10 +159,10 @@ const RegisterPage = () => {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             name="surname"
-            label="Pavardė"
+            label="Surname"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.surname}
@@ -176,7 +176,7 @@ const RegisterPage = () => {
         <Grid item xs={12}>
           <TextField
             name="email"
-            label="El. paštas"
+            label="E-mail"
             onChange={handleEmailChange}
             onBlur={handleEmailBlur}
             value={values.email}
@@ -197,7 +197,7 @@ const RegisterPage = () => {
         <Grid item xs={12}>
           <TextField
             name="password"
-            label="Slaptažodis"
+            label="Password"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.password}
@@ -211,8 +211,9 @@ const RegisterPage = () => {
         </Grid>
         <Grid item xs={12}>
           <TextField
+            sx={{ mb: 4 }}
             name="passwordConfirmation"
-            label="Slaptažodžio pakartojimas"
+            label="Repeat Password"
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.passwordConfirmation}

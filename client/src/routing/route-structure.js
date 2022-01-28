@@ -11,7 +11,7 @@ const routeStructure = [
       { index: true, pageName: 'HomePage' },
       { path: 'login', pageName: 'LoginPage', auth: PUBLIC_ONLY },
       { path: 'sign-up', pageName: 'SignUpPage', auth: PUBLIC_ONLY },
-      { path: '*', pageName: 'HomePage' },
+      { path: '*', pageName: 'ErrorPage' },
     ],
   },
 ];

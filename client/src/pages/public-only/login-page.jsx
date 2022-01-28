@@ -3,8 +3,6 @@ import {
   TextField,
   Grid,
   Alert,
-  Box,
-  Typography,
 } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -70,6 +68,7 @@ const LoginPage = () => {
 
   return (
     <AuthForm
+      title="Sign in"
       linkTo={routes.SignUpPage}
       linkTitle="New to BBB? Join now"
       loading={isSubmitting}
@@ -81,14 +80,10 @@ const LoginPage = () => {
       </Alert>
       <Grid container spacing={4}>
         <Grid item xs={12}>
-          <Box sx={{ mb: 2 }}>
-            <Typography variant="h3" sx={{ textAlign: 'left' }}> LOREM</Typography>
-            <Typography variant="p" sx={{ fontSize: '12px' }}> Stay updated on your burgers world</Typography>
-          </Box>
           <TextField
             name="email"
             variant="standard"
-            label="El. paštas"
+            label="E-mail"
             value={values.email}
             error={touched.email && Boolean(errors.email)}
             helperText={touched.email && errors.email}
@@ -104,7 +99,7 @@ const LoginPage = () => {
           <TextField
             name="password"
             variant="standard"
-            label="Slaptažodis"
+            label="Password"
             type="password"
             value={values.password}
             error={touched.password && Boolean(errors.password)}

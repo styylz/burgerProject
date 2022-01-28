@@ -12,17 +12,14 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     authFailed(state) {
-      console.log('auth fail store sauna');
       state.loggedIn = false;
     },
     login(state, { payload }) {
-      console.log('loginas store sauna');
       state.loggedIn = true;
       state.user = payload.user;
       state.redirectTo = payload.redirectTo;
     },
     logout(state) {
-      console.log('logout store sauna');
       state.loggedIn = false;
       state.user = null;
       state.redirectTo = null;

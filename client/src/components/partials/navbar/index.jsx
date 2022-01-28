@@ -14,13 +14,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { authSelector } from '../../../store/auth';
 
 const pages = [
   {title:"Home", link:'/'},
   {title:"Burgers", link:'*'},
   {title:"Login", link:'/login'}
 ]
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Account','Logout'];
 
 const StyledNavLink = styled(NavLink)(({ theme }) => ({
   color: theme.palette.common.black,
@@ -31,6 +33,10 @@ const StyledNavLink = styled(NavLink)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const auth = useSelector(authSelector);
+
+  console.log(auth)
+  console.log(pages.filter(({title}) => title === 'Login'))
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -87,11 +93,12 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map(({title}) => (
+              {pages.map(({title}) => {
+                return(
                 <MenuItem key={title} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{title}</Typography>
                 </MenuItem>
-              ))}
+              )})}
             </Menu>
           </Box>
           <Typography

@@ -10,8 +10,9 @@ import PageRouter from './routing/page-router';
 const App = () => (
   <ReduxProvider store={store}>
     <ThemeProvider theme={lightTheme}>
-      <CssBaseline />
-      <PageRouter />
+      <CssBaseline>
+        <PageRouter />
+      </CssBaseline>
     </ThemeProvider>
   </ReduxProvider>
 );
