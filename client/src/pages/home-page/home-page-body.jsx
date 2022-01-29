@@ -1,6 +1,5 @@
-/* eslint-disable */
 import {
-  Box, Container, Typography, styled, TextField, Input,
+  Box, Container, Typography, styled, Input,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
@@ -35,11 +34,12 @@ const StyledInputElement = styled(Input)(
   padding: 20px 20px;
   transition: all 150ms ease;
   letter-spacing: 1.20px;
-  background: ${theme.palette.mode === 'dark' ? '' : grey[100]};
+  background: white;
 
   &:hover {
     border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
     background: ${theme.palette.mode === 'dark' ? '' : grey[100]};
+    color: black;
   }
 
   &:focus {
@@ -48,27 +48,29 @@ const StyledInputElement = styled(Input)(
   }
 `,
 );
-
-const Home = () => (
-  <Container sx={{ border: '1px solid black', minHeight: '70vh' }}>
-    <Box>
+const HomePageBody = () => (
+  <Container sx={{ border: '1px solid black', minHeight: '60vh' }}>
+    <Box sx={{ marginBottom: 5 }}>
       <Typography sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}> Hey, Choose the best burger...</Typography>
     </Box>
-    <Box sx={{ textAlign: 'center' }}>
-    <StyledInputElement placeholder="Hello world" endAdornment={<SearchIcon/>} />
+    <Box sx={{ textAlign: 'center', marginBottom: 3 }}>
+      <StyledInputElement placeholder="Hello world" endAdornment={<SearchIcon />} />
 
     </Box>
-    <Box sx={{ margin: 'auto', display: 'flex', alignItems: 'center' }}>
+    <Box sx={{
+      margin: 'auto', display: 'flex', justifyContent: 'center', border: '1px solid red',
+    }}
+    >
       <Box sx={{
-        border: '1px solid black', borderRadius: '50%', width: '50px', height: '50px',
+        border: '1px solid black', borderRadius: '50%', width: '70px ', height: '70px ', marginRight: 2,
       }}
       />
       <Box sx={{
-        border: '1px solid black', borderRadius: '50%', width: '50px', height: '50px',
+        border: '1px solid black', borderRadius: '50%', width: '70px ', height: '70px ', marginRight: 2,
       }}
       />
       <Box sx={{
-        border: '1px solid black', borderRadius: '50%', width: '50px', height: '50px',
+        border: '1px solid black', borderRadius: '50%', width: '70px ', height: '70px ',
       }}
       />
     </Box>
@@ -76,4 +78,4 @@ const Home = () => (
   </Container>
 );
 
-export default Home;
+export default HomePageBody;
