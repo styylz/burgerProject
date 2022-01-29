@@ -1,5 +1,6 @@
 // no-auth
 import HomePage from '../pages/home-page';
+import BurgerPage from '../pages/burger-page';
 
 // public-only
 import LoginPage from '../pages/public-only/login-page';
@@ -14,4 +15,5 @@ export default {
   LoginPage,
   SignUpPage,
   ErrorPage,
+  BurgerPage,
 };

@@ -19,24 +19,28 @@ import { authSelector } from '../../../store/auth';
 
 const pages = [
   {title:"Home", link:'/'},
-  {title:"Burgers", link:'*'},
+  {title:"Burgers", link:'Burgers'},
   {title:"Login", link:'/login'}
 ]
+
 const settings = ['Account','Logout'];
 
 const StyledNavLink = styled(NavLink)(({ theme }) => ({
   color: theme.palette.common.black,
+  textTransform: 'capitalize',
+  fontWeight: '100',
+  fontSize: '1.2rem',
   textDecoration: 'none',
+  transform:  0,
   '&.active': {
-    borderBottom: `1px solid ${theme.palette.common.white}`,
+    borderBottom: `1px solid ${theme.palette.common.black}`,
+    transform:  1,
   },
 }));
 
 const Navbar = () => {
   const auth = useSelector(authSelector);
 
-  console.log(auth)
-  console.log(pages.filter(({title}) => title === 'Login'))
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 

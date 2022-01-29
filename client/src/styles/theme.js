@@ -12,16 +12,7 @@ const theme = createTheme({
 
   typography: {
     fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
       'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
     ].join(','),
     body1: {
       color: 'black',
@@ -35,7 +26,8 @@ export const lightTheme = createTheme(theme, {
       height: 64,
     },
     footer: {
-      height: 64,
+      height: 41,
+      color: '#FFFEFB',
     },
   },
   shadows: [

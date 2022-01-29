@@ -3,6 +3,7 @@ import {
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
+import CircleImageContainer from '../../components/containers/circle-image-container';
 
 const blue = {
   200: '#80BFFF',
@@ -25,12 +26,11 @@ const grey = {
 const StyledInputElement = styled(Input)(
   ({ theme }) => `
   height: 60px;
-  width: 50%;
+  width: 65%;
   font-size: 1.1rem;
   font-family: Roboto;
   font-weight: 100;
   color: rgba(0, 0, 0, 0.5);
-  border: 1px solid ${theme.palette.mode === 'dark' ? grey[800] : grey[300]};
   padding: 20px 20px;
   transition: all 150ms ease;
   letter-spacing: 1.20px;
@@ -38,7 +38,6 @@ const StyledInputElement = styled(Input)(
 
   &:hover {
     border-color: ${theme.palette.mode === 'dark' ? grey[700] : grey[400]};
-    background: ${theme.palette.mode === 'dark' ? '' : grey[100]};
     color: black;
   }
 
@@ -48,31 +47,48 @@ const StyledInputElement = styled(Input)(
   }
 `,
 );
-const HomePageBody = () => (
-  <Container sx={{ border: '1px solid black', minHeight: '60vh' }}>
-    <Box sx={{ marginBottom: 5 }}>
-      <Typography sx={{ textTransform: 'uppercase', fontWeight: 'bold' }}> Hey, Choose the best burger...</Typography>
+
+const HomePageBody = ({ image }) => (
+  <Container sx={{
+    minHeight: {
+      xs: '40vh',
+      sm: '50vh',
+      md: '60vh',
+      lg: '60vh',
+    },
+  }}
+  >
+    <Box sx={{ marginBottom: 7 }}>
+      <Typography sx={{
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        fontSize: {
+          xs: '1.1rem',
+          sm: '1.5rem',
+          lg: '2.5rem',
+        },
+      }}
+      >
+        {' '}
+        Hey, Choose the best burger...
+
+      </Typography>
     </Box>
-    <Box sx={{ textAlign: 'center', marginBottom: 3 }}>
-      <StyledInputElement placeholder="Hello world" endAdornment={<SearchIcon />} />
+    <Box sx={{ textAlign: 'center', marginBottom: 9 }}>
+      <StyledInputElement placeholder="Find a recipe" endAdornment={<SearchIcon />} sx={{ textTransform: 'uppercase' }} />
 
     </Box>
     <Box sx={{
-      margin: 'auto', display: 'flex', justifyContent: 'center', border: '1px solid red',
+      display: 'flex', justifyContent: 'space-evenly',
     }}
     >
-      <Box sx={{
-        border: '1px solid black', borderRadius: '50%', width: '70px ', height: '70px ', marginRight: 2,
-      }}
-      />
-      <Box sx={{
-        border: '1px solid black', borderRadius: '50%', width: '70px ', height: '70px ', marginRight: 2,
-      }}
-      />
-      <Box sx={{
-        border: '1px solid black', borderRadius: '50%', width: '70px ', height: '70px ',
-      }}
-      />
+      {image.map((burger) => (
+        <CircleImageContainer src={burger.src}>
+          <Typography sx={{ fontSize: '1.3rem' }}>
+            {burger.title}
+          </Typography>
+        </CircleImageContainer>
+      ))}
     </Box>
 
   </Container>
