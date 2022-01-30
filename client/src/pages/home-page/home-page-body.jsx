@@ -58,7 +58,7 @@ const HomePageBody = ({ image }) => (
     },
   }}
   >
-    <Box sx={{ marginBottom: 7 }}>
+    <Box sx={{ marginBottom: 7, mt: 6 }}>
       <Typography sx={{
         textTransform: 'uppercase',
         fontWeight: 'bold',

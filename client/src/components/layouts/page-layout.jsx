@@ -12,7 +12,7 @@ const PageLayout = () => {
   return(
   <Box>
     <Navbar />
-    <Box component="main" sx={{ minHeight: `calc(100vh - ${theme.mixins.toolbar.height}px - ${theme.mixins.footer.height}px  )`, mt: '5vw' }}>
+    <Box component="main" sx={{ minHeight: `calc(100vh - ${theme.mixins.toolbar.height}px - ${theme.mixins.footer.height}px  )`}}>
       <Outlet />
     </Box>
     <Footer />
