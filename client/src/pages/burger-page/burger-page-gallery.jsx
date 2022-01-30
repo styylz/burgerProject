@@ -11,7 +11,6 @@ const BurgerPageGallery = () => {
   return (
     <Container
       maxWidth="xl"
-      sx={{ border: '1px solid black' }}
     >
       <Box sx={{ display: 'flex' }}>
 
@@ -30,6 +29,15 @@ const BurgerPageGallery = () => {
           p: 2,
         }}
       >
+        <Grid item xs={12} sm={12} md={12} lg={4}>
+          <BurgerGalleryCard />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={4}>
+          <BurgerGalleryCard />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={4}>
+          <BurgerGalleryCard />
+        </Grid>
         <Grid item xs={12} sm={12} md={12} lg={4}>
           <BurgerGalleryCard />
         </Grid>

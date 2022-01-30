@@ -55,7 +55,7 @@ const BurgerGalleryCard = () => {
           />
           <Box>
             <Typography sx={{ color: 'white', textAlign: 'center' }}>
-              15
+              { Math.floor(Math.random() * 30)}
             </Typography>
           </Box>
         </Box>
@@ -76,7 +76,7 @@ const BurgerGalleryCard = () => {
             This is fairly quick burger
           </Typography>
         </Box>
-        <Box sx={{ width: '300px' }}>
+        <Box>
           <StarRating />
         </Box>
 

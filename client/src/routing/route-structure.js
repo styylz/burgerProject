@@ -12,6 +12,7 @@ const routeStructure = [
       { path: 'login', pageName: 'LoginPage', auth: PUBLIC_ONLY },
       { path: 'sign-up', pageName: 'SignUpPage', auth: PUBLIC_ONLY },
       { path: 'burgers', pageName: 'BurgerPage', auth: PUBLIC_ONLY },
+      { path: 'recipe', pageName: 'RecipePage', auth: PUBLIC_ONLY },
       { path: '*', pageName: 'ErrorPage' },
     ],
   },
