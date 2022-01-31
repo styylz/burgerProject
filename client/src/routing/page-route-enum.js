@@ -9,13 +9,15 @@ import SignUpPage from '../pages/public-only/register-page';
 // user
 import PageLayout from '../components/layouts/page-layout';
 import ErrorPage from '../pages/error-page';
+import ProfilePage from '../pages/profile-page';
 
 export default {
   RecipePage,
   PageLayout,
   HomePage,
+  BurgerPage,
   LoginPage,
   SignUpPage,
   ErrorPage,
-  BurgerPage,
+  ProfilePage,
 };

@@ -1,12 +1,14 @@
 import React from 'react';
 
-const RecipesPage = () => {
-  console.log('');
-  return (
-    <>
-      hi
-    </>
-  );
-};
+import RecipesPageLG from './recipes-pageLg';
+import RecipesPageXs from './recipes-page-mobile';
+
+const RecipesPage = () => (
+  <>
+    <RecipesPageLG sx={{ display: { xs: 'none', lg: 'block' } }} />
+    <RecipesPageXs sx={{ display: { xs: 'flex', lg: 'none' } }} />
+  </>
+
+);
 
 export default RecipesPage;
