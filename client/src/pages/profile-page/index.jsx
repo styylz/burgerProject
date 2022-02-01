@@ -1,10 +1,15 @@
 import { Box } from '@mui/material';
 import React from 'react';
+import ProfilePageBoxLayout from './profile-page-box-layout';
 
 const ProfilePage = () => {
   console.log('');
   return (
-    <Box> Hel</Box>
+    <Box>
+
+      <ProfilePageBoxLayout />
+    </Box>
+
   );
 };
 
