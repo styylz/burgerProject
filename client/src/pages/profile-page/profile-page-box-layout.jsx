@@ -6,8 +6,12 @@ const ProfilePageBoxLayout = ({ children }) => {
   return (
     <Box sx={{
       backgroundColor: 'white',
-      width: '80%',
-      height: '70vh',
+      maxHeight: '70vh',
+      border: '1px solid black',
+      width: 900,
+      overflow: 'hidden',
+      overflowY: 'scroll',
+
     }}
     >
       {children}
