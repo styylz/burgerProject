@@ -4,7 +4,7 @@ import React from 'react';
 const ProfilePage = () => {
   console.log('');
   return (
-    <Box />
+    <Box> Hel</Box>
   );
 };
 
