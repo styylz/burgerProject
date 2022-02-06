@@ -3,8 +3,7 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import StarIcon from '@mui/icons-material/Star';
 import React from 'react';
 
-const Star = ({ selected = false, onSelect, ...size }) => {
-  console.log({ ...size });
+const Star = ({ selected = false, onSelect, }) => {
   return (
     <>
       {selected ? (

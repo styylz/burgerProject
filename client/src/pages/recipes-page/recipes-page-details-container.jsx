@@ -32,6 +32,20 @@ const RecipesPageDetails = ({ children }) => {
         xs: 'none',
         lg: 'none'
       },
+      '::-webkit-scrollbar': {
+        width: '15px',
+        backgroundColor: '#F5F5F5',
+      },
+      '::-webkit-scrollbar-track': {
+        '-webkit-box-shadow': 'nset 0 0 6px rgba(0,0,0,0.3)',
+        bordeRadius: '10px',
+        backgroundColor: '#F5F5F5',
+      },
+      '::-webkit-scrollbar-thumb': {
+        bordeRadius: '10px',
+
+        backgroundImage: '-webkit-linear-gradient(90deg, rgba(252,74,26,1) 0%, rgba(247,183,51,1) 100%)',
+      },
 
     }}
     >
