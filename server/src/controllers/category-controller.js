@@ -99,11 +99,11 @@ const replaceCategory = async (req, res) => {
 };
 
 
+
 module.exports = {
   getCategories,
   createCategory,
   getCategory,
   deleteCategory,
   updateCategory,
-  replaceCategory
 };
