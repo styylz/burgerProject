@@ -3,9 +3,8 @@ const CategoryViewModel = require('../view-models/categories-view-model')
 
 const getCategories = async (req,res)=> {
   const CategoryDocs = await CategoryModel.find();
-  console.log(CategoryDocs);
   const Categories = CategoryDocs.map(Category => new CategoryViewModel(Category));
-  res.status(200).json({ Categories });
+  res.status(200).json(Categories);
 }
 
 const createCategory = async (req, res) => {
@@ -75,28 +74,28 @@ const updateCategory = async (req, res) => {
   }
 };
 
-const replaceCategory = async (req, res) => {
-  const { id } = req.params;
-  const { title } = req.body;
-  try {
-      await CategoryModel.findById(id);
+// const replaceCategory = async (req, res) => {
+//   const { id } = req.params;
+//   const { title } = req.body;
+//   try {
+//       await CategoryModel.findById(id);
 
-      try {
-          const CategoryDoc = await CategoryModel.findOneAndReplace(
-              id,
-              { title },
-              { new: true }
-          );
-          const Category = new CategoryViewModel(CategoryDoc);
-          res.status(200).json(Category);
-      } catch (error) {
-          res.status(400).json({ message: 'Blogi parametrai' });
-      }
+//       try {
+//           const CategoryDoc = await CategoryModel.findOneAndReplace(
+//               id,
+//               { title },
+//               { new: true }
+//           );
+//           const Category = new CategoryViewModel(CategoryDoc);
+//           res.status(200).json(Category);
+//       } catch (error) {
+//           res.status(400).json({ message: 'Blogi parametrai' });
+//       }
 
-  } catch (error) {
-      res.status(404).json({ message: 'Produktas nerastas' });
-  }
-};
+//   } catch (error) {
+//       res.status(404).json({ message: 'Produktas nerastas' });
+//   }
+// };
 
 
 

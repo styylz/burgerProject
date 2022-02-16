@@ -40,6 +40,12 @@ const userSchema = new Mongoose.Schema({
     type: 'string',
     required: true,
   },
+  favorite: [
+    {
+      type: Mongoose.Schema.Types.ObjectId,
+      ref: 'Burger',
+    }
+  ]
 }, {
   timestamps: true,
 });
