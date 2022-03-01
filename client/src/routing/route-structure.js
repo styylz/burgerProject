@@ -1,4 +1,3 @@
-/** eslint-disable */
 import {
   PUBLIC_ONLY,
 } from './auth-types';
@@ -14,6 +13,8 @@ const routeStructure = [
       { path: 'burgers', pageName: 'BurgerPage', auth: PUBLIC_ONLY },
       { path: 'recipe', pageName: 'RecipePage', auth: PUBLIC_ONLY },
       { path: 'profile', pageName: 'ProfilePage', auth: PUBLIC_ONLY },
+      { path: 'dashboard', pageName: 'DashboardPage', auth: PUBLIC_ONLY },
+      { path: 'dashboard/categories', pageName: 'DashboardCategoriesPanelPage', auth: PUBLIC_ONLY },
       { path: '*', pageName: 'ErrorPage' },
     ],
   },

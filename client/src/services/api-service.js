@@ -10,7 +10,35 @@ const instance = axios.create({
 const getBurgers = async () => {
   try {
     const response = await instance.get('/burgers');
-    return response;
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getCategories = async () => {
+  try {
+    const response = await instance.get('/categories');
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getIngredients = async () => {
+  try {
+    const response = await instance.get('/ingredients');
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const createBurger = async () => {
+  try {
+    const response = await instance.post('/burgers');
+
+    return response.data;
   } catch (error) {
     return error;
   }
@@ -18,6 +46,9 @@ const getBurgers = async () => {
 
 const Api = {
   getBurgers,
+  getCategories,
+  getIngredients,
+  createBurger,
 };
 
 export default Api;

@@ -1,18 +1,17 @@
 const IngredientViewModel = require('../view-models/ingredient-view-model')
 const CategoryViewModel = require('../view-models/categories-view-model')
-const UserViewModel = require('../view-models/user-view-model')
 
 class BurgerViewModel {
-  constructor({_id, title, userId, ingredientId, categoriesId, rating, steps, cookingTime}){
+  constructor({_id, title, ingredients, steps, cookingTime, image, category, createdAt, updatedAt}){
     this.id = _id
     this.title = title
-    //FIXME userViewModel isn't working
-    this.userId = userId
-    this.ingredientId = ingredientId.map(ingredient => new IngredientViewModel(ingredient))
-    this.categoriesId = categoriesId.map(category => new CategoryViewModel(category))
+    this.image = image
+    this.ingredients = ingredients.map(ingredient => new IngredientViewModel(ingredient))
+    if(category) this.category = new CategoryViewModel(category)
     this.cookingTime = cookingTime
     this.steps= steps
-    this.rating = rating
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
   }
 }
 

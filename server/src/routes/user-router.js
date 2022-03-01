@@ -4,7 +4,7 @@ const adminMiddleware = require('../middlewares/admin-middleware');
 const {
   getUsers,
   updateUser,
-  // createUser,
+  createUser,
 } = require('../controllers/user-controller');
 
 const router = express.Router();
@@ -12,7 +12,7 @@ const router = express.Router();
 // middlewares
 router.use(authMiddleware);
 
-// router.post('/', createUser)
+router.post('/', createUser)
 
 router.get('/', adminMiddleware, getUsers);
 

@@ -11,6 +11,10 @@ import PageLayout from '../components/layouts/page-layout';
 import ErrorPage from '../pages/error-page';
 import ProfilePage from '../pages/profile-page';
 
+// admin
+import DashboardPage from '../pages/auth/admin';
+import DashboardCategoriesPanelPage from '../pages/auth/admin/categories-panel-page';
+
 export default {
   RecipePage,
   PageLayout,
@@ -20,4 +24,6 @@ export default {
   SignUpPage,
   ErrorPage,
   ProfilePage,
+  DashboardPage,
+  DashboardCategoriesPanelPage,
 };

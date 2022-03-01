@@ -2,28 +2,30 @@ const Mongoose = require('mongoose');
 const Schema = Mongoose.Schema
 const uniqueValidator = require('mongoose-unique-validator');
 
-const burgersSchema = new Schema({
+const burgerSchema = new Schema({
   title: {
     type: 'string',
     unique: true,
   },
-  userId: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
-  ingredientId: [
+  ingredients: [
     {
-    type: Schema.Types.ObjectId,
-    ref: 'Ingredient',
+      ingredient: {
+        type: Schema.Types.ObjectId,
+        ref: 'Ingredient',
+      },
+      amount: 'string'
     }
-],
-  categoriesId: [
+  ],
+  category:
     {
       type: Schema.Types.ObjectId,
       ref: 'Category',
-    }
-  ],
+    },
+
+  image:{
+    type: 'string',
+    required: false
+  },
   cookingTime: {
     type: 'number',
     required: true
@@ -34,17 +36,13 @@ const burgersSchema = new Schema({
     required: false
   },
 
-  rating:{
-    type: 'number',
-    required: true
-  }
 },
 {
   timestamps: true,
 });
 
-burgersSchema.plugin(uniqueValidator);
+burgerSchema.plugin(uniqueValidator);
 
-const BurgersModel = Mongoose.model('Burger', burgersSchema);
+const BurgersModel = Mongoose.model('Burger', burgerSchema);
 
 module.exports = BurgersModel;

@@ -3,23 +3,22 @@ const BurgersViewModel = require('../view-models/burger-view-model')
 
 const getBurgers = async (req,res) => {
     const BurgerDocs = await BurgersModel.find()
-    .populate('userId')
-    .populate('categoriesId')
-    .populate('ingredientId')
+    .populate('category')
+    .populate('ingredients')
+    console.log(BurgerDocs)
     const Burgers = BurgerDocs.map(burger => new BurgersViewModel(burger))
-    console.log(Burgers)
-
-    res.status(200).json({Burgers})
-
+    res.status(200).json(Burgers)
 }
 
 const createBurger = async (req, res) => {
+  console.log(req.file)
+  console.log('a',req.body)
+
   const BurgerDoc = await BurgersModel(req.body);
   try {
     await BurgerDoc.save();
     const Burger = new BurgersViewModel(BurgerDoc);
-    console.log(Burger)
-
+    console.log('Burgas', Burger)
       res.status(201).json(Burger);
   } catch (error) {
       res.status(400).json({

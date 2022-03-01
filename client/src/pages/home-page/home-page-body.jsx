@@ -1,9 +1,10 @@
 import {
-  Box, Container, Typography, styled, Input,
+  Box, Container, Typography, styled, Input, Button,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import CircleImageContainer from '../../components/containers/circle-image-container';
+import ImageService from '../../services/image-service';
 
 const blue = {
   200: '#80BFFF',
@@ -48,50 +49,99 @@ const StyledInputElement = styled(Input)(
 `,
 );
 
-const HomePageBody = ({ image }) => (
-  <Container sx={{
-    minHeight: {
-      xs: '40vh',
-      sm: '50vh',
-      md: '60vh',
-      lg: '60vh',
-    },
-  }}
-  >
-    <Box sx={{ marginBottom: 7, mt: 6 }}>
-      <Typography sx={{
-        textTransform: 'uppercase',
-        fontWeight: 'bold',
-        fontSize: {
-          xs: '1.1rem',
-          sm: '1.5rem',
-          lg: '2.5rem',
-        },
-      }}
-      >
-        {' '}
-        Hey, Choose the best burger...
+const HomePageBody = ({ image }) => {
+  const [imgData, setImgData] = useState([]);
+  console.log(imgData);
+  const updateImgData = (newImgData) => {
+    setImgData([...imgData, ...newImgData]);
+  };
 
-      </Typography>
-    </Box>
-    <Box sx={{ textAlign: 'center', marginBottom: 9 }}>
-      <StyledInputElement placeholder="Find a recipe" endAdornment={<SearchIcon />} sx={{ textTransform: 'uppercase' }} />
+  // const handleImageDelete = async (id) => {
+  //   await ImageService.deleteImage(id);
+  //   setImgData(imgData.filter((x) => x.id !== id));
+  // };
 
-    </Box>
-    <Box sx={{
-      display: 'flex', justifyContent: 'space-evenly',
+  useEffect(() => {
+    (async () => {
+      const fetchedImgData = await ImageService.getImages();
+      setImgData(fetchedImgData);
+    })();
+  }, []);
+
+  const fileUploadRef = useRef(null);
+
+  const handleUploadFiles = () => {
+    fileUploadRef.current.click();
+  };
+
+  const handleImagesLoaded = async () => {
+    const input = fileUploadRef.current;
+    const data = await ImageService.uploadImages(input.files);
+    updateImgData(data);
+  };
+
+  return (
+    <Container sx={{
+      minHeight: {
+        xs: '40vh',
+        sm: '50vh',
+        md: '60vh',
+        lg: '60vh',
+      },
     }}
     >
-      {image.map((burger) => (
-        <CircleImageContainer src={burger.src}>
-          <Typography sx={{ fontSize: '1.3rem' }}>
-            {burger.title}
-          </Typography>
-        </CircleImageContainer>
-      ))}
-    </Box>
+      <Box sx={{ marginBottom: 7, mt: 6 }}>
+        <Typography sx={{
+          textTransform: 'uppercase',
+          fontWeight: 'bold',
+          fontSize: {
+            xs: '1.1rem',
+            sm: '1.5rem',
+            lg: '2.5rem',
+          },
+        }}
+        >
+          {' '}
+          Hey, Choose the best burger...
 
-  </Container>
-);
+        </Typography>
+      </Box>
+      <Box sx={{ textAlign: 'center', marginBottom: 9 }}>
+        <StyledInputElement placeholder="Find a recipe" endAdornment={<SearchIcon />} sx={{ textTransform: 'uppercase' }} />
+
+      </Box>
+      <Box sx={{
+        display: 'flex', justifyContent: 'space-evenly',
+      }}
+      >
+        {image.map((burger) => (
+          <CircleImageContainer src={burger.src}>
+            <Typography sx={{ fontSize: '1.3rem' }}>
+              {burger.title}
+            </Typography>
+          </CircleImageContainer>
+        ))}
+      </Box>
+
+      <Button
+        variant="outlined"
+        size="small"
+        sx={{ textTransform: 'none' }}
+        onClick={handleUploadFiles}
+      >
+        UPLOAD IMAGES
+      </Button>
+      <input
+        type="file"
+        hidden
+        ref={fileUploadRef}
+        accept=".jpg, .jpeg, .png"
+        multiple
+        onChange={handleImagesLoaded}
+      />
+
+    </Container>
+  );
+};
 
 export default HomePageBody;

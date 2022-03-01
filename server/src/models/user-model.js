@@ -27,11 +27,7 @@ const userSchema = new Mongoose.Schema({
     enum: ['USER', 'ADMIN'],
     default: 'USER',
   },
-  mainImg: {
-    type: Mongoose.Schema.Types.ObjectId,
-    ref: 'Image',
-    unique: true,
-  },
+  img: 'string',
   name: {
     type: 'string',
     required: true,
@@ -40,7 +36,7 @@ const userSchema = new Mongoose.Schema({
     type: 'string',
     required: true,
   },
-  favorite: [
+  favorites: [
     {
       type: Mongoose.Schema.Types.ObjectId,
       ref: 'Burger',

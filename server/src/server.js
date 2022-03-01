@@ -15,6 +15,8 @@ const server = express();
 const {
   SERVER_PORT,
   DB_CONNECTION,
+  SERVER_DOMAIN,
+  PUBLIC_PATH,
 } = process.env;
 
 const corsOptions = {
@@ -24,6 +26,7 @@ const corsOptions = {
 
 // Middlewares
 server.use(morgan('tiny'));
+server.use(express.static(PUBLIC_PATH));
 server.use(cors(corsOptions));
 server.use(express.json());
 // Response handlers
@@ -34,8 +37,9 @@ server.use('/api/categories', categoryRouter)
 server.use('/api/ingredients', ingredientRouter)
 server.use('/api/burgers', burgerRouter)
 
+
 server.listen(SERVER_PORT, () => {
-  console.log(`puslapis veikia ant http://localhost:${SERVER_PORT}/`);
+  console.log(`puslapis veikia ant ${SERVER_DOMAIN}:${SERVER_PORT}/`);
   (async () => {
     try {
       await Mongoose.connect(DB_CONNECTION);

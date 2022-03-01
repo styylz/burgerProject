@@ -4,8 +4,8 @@ const categoriesSchema = new Mongoose.Schema({
   title: {
     type: 'string',
     required: true,
+    unique: true
   },
-
 },
 {
   timestamps: true,

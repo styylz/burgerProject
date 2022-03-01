@@ -38,24 +38,24 @@ const updateUser = async (req, res) => {
 
 }
 
-// const createUser = async (req, res) => {
-//   const userDoc = await UserModel(req.body);
-//   console.log()
-//   try {
-//     await userDoc.save();
-//     const User = new UserViewModel(userDoc);
-//     console.log(User)
+const createUser = async (req, res) => {
+  const userDoc = await UserModel(req.body);
+  console.log(userDoc)
+  try {
+    await userDoc.save();
+    const User = new UserViewModel(userDoc);
+    console.log(User)
 
-//       res.status(201).json(User);
-//   } catch (error) {
-//       res.status(400).json({
-//           message: `Klaida: jau yra toks burgeris yra`,
-//       });
-//   }
-// };
+      res.status(201).json(User);
+  } catch (error) {
+      res.status(400).json({
+          message: `Klaida: jau yra toks useris`,
+      });
+  }
+};
 
 module.exports = {
   getUsers,
   updateUser,
-  // createUser
+  createUser
 };
