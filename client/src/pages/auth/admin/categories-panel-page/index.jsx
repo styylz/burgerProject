@@ -83,7 +83,7 @@ const CategoryPanelPage = () => {
         />
       </Box>
       <CategoriesPanelPageTable
-        categories={categories}
+        categories={categories.map((x) => ({ ...x, edited: editedCategoryId === x.id }))}
         onDelete={deleteCategory}
         onEdit={editCategory}
       />

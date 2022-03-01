@@ -18,11 +18,11 @@ const BurgerService = new (class BurgerService {
   }
 
   async uploadBurger(values) {
-    console.log(values);
+    console.log('1', values);
     const formData = new FormData();
     formData.append('title', values.title);
     formData.append('ingredients', JSON.stringify(values.ingredients));
-    formData.append('categories', values.categories);
+    formData.append('category', values.category);
     formData.append('cookingTime', values.cookingTime);
     formData.append('steps', values.steps);
     formData.append('image', values.image);
@@ -32,7 +32,7 @@ const BurgerService = new (class BurgerService {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log(response);
+    console.log('2', response);
 
     return response;
   }

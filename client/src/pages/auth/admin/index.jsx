@@ -29,7 +29,7 @@ const initialValues = {
   ingredients: [
     { id: createId(), ingredientId: '', amount: 0 },
   ],
-  categories: '',
+  category: '',
   cookingTime: '',
   steps: '',
 };
@@ -121,6 +121,7 @@ const Dashboard = () => {
     })();
   }, []);
 
+  console.log(values);
   return (
     <Box
       component="form"
@@ -144,10 +145,10 @@ const Dashboard = () => {
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Category</InputLabel>
             <Select
-              name="categories"
+              name="category"
               labelId="demo-simple-select-label"
-              value={values.categories}
-              label="Categories"
+              value={values.category}
+              label="Category"
               onChange={handleChange}
             >
               {[unselectedCategory, ...categories].map((category) => (

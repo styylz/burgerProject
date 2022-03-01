@@ -12,13 +12,13 @@ const getBurgers = async (req,res) => {
 
 const createBurger = async (req, res) => {
   console.log(req.file)
-  console.log('a',req.body)
 
+  console.log('req.body',req.body)
   const BurgerDoc = await BurgersModel(req.body);
   try {
     await BurgerDoc.save();
     const Burger = new BurgersViewModel(BurgerDoc);
-    console.log('Burgas', Burger)
+
       res.status(201).json(Burger);
   } catch (error) {
       res.status(400).json({

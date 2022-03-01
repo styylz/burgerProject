@@ -12,7 +12,7 @@ import {
   styled,
 } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-// import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
+import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 import CachedIcon from '@mui/icons-material/Cached';
 import CategoriesService from './services/categories-service';
 
@@ -65,7 +65,7 @@ const CategoriesPanelPageTable = ({ categories, onDelete, onEdit }) => {
                   variant="contained"
                   onClick={() => onEdit(burgerCat.id)}
                 >
-                  <CachedIcon />
+                  {burgerCat.edited ? <DoNotDisturbAltIcon /> : <CachedIcon />}
 
                 </Button>
                 <Button
