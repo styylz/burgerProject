@@ -1,3 +1,4 @@
+/* eslint-disable*/
 import {
   TextField,
   Grid,
@@ -15,6 +16,7 @@ import { useFormik } from 'formik';
 import Api from '../../../services/api-service';
 import MultipleSelectGroup from './multipleSelectGroup';
 import BurgerService from '../../../services/burger-service';
+import parse from 'html-react-parser';
 
 let id = 0;
 const createId = () => {
@@ -43,6 +45,7 @@ const unselectedCategory = {
 const Dashboard = () => {
   const [categories, setCategories] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [burgers, setBurgers] = useState([]);
   const fileUploadRef = useRef(null);
 
   const onSubmit = async (values) => {
@@ -121,12 +124,21 @@ const Dashboard = () => {
     })();
   }, []);
 
-  console.log(values);
+  useEffect(() => {
+    (async () => {
+      const burgs = await BurgerService.getBurgers();
+      setBurgers(burgs);
+    })();
+  }, []);
+
+  const test = parse(`<Box>hi</Box> <h2> hi </h2> <h3> hi </h3>`); // React.createElement('p', {}, 'Hello, World!')
+
+  console.log(burgers)
   return (
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{ width: 300, m: 'auto', mt: 8 }}
+      sx={{ width: 300, m: 'auto',}}
     >
       <Typography variant="h2" sx={{ fontSize: 25, textAlign: 'center', mb: 5 }}>Create Burger</Typography>
       <Grid container spacing={2}>
@@ -225,12 +237,15 @@ const Dashboard = () => {
             fullWidth
             variant="contained"
             color="primary"
-            sx={{ height: 56, fontWeight: 'bold' }}
+            sx={{ height: 56, fontWeight: 'bold', mb:5 }}
           >
             ADD BURGER
           </Button>
         </Grid>
       </Grid>
+      {burgers.map(({ image, id }) => <img style={{width: '100px', height: '100px'}} key={id} alt="alt" src={`${image}`} />)}
+      {/* <img alt="x" src="server\public\images\1646057597969-351682313.jpg" />
+      {burgers.map(({ steps }) => parse(`${steps}`) )} */}
     </Box>
 
   );

@@ -29,6 +29,6 @@ const Star = ({ selected = false, onSelect, }) => {
     </>
 
   );
-}; // if value of selected is not present or false color grey will be used
+};
 
 export default Star;

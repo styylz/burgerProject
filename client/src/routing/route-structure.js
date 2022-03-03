@@ -1,5 +1,7 @@
 import {
   PUBLIC_ONLY,
+  USER,
+  ADMIN,
 } from './auth-types';
 
 const routeStructure = [
@@ -10,12 +12,19 @@ const routeStructure = [
       { index: true, pageName: 'HomePage' },
       { path: 'login', pageName: 'LoginPage', auth: PUBLIC_ONLY },
       { path: 'sign-up', pageName: 'SignUpPage', auth: PUBLIC_ONLY },
-      { path: 'burgers', pageName: 'BurgerPage', auth: PUBLIC_ONLY },
+      { path: 'burgers', pageName: 'BurgerPage' },
       { path: 'recipe', pageName: 'RecipePage', auth: PUBLIC_ONLY },
-      { path: 'profile', pageName: 'ProfilePage', auth: PUBLIC_ONLY },
-      { path: 'dashboard', pageName: 'DashboardPage', auth: PUBLIC_ONLY },
-      { path: 'dashboard/categories', pageName: 'DashboardCategoriesPanelPage', auth: PUBLIC_ONLY },
+      { path: 'profile', pageName: 'ProfilePage', auth: USER },
       { path: '*', pageName: 'ErrorPage' },
+    ],
+  },
+  {
+    path: '/',
+    pageName: 'AdminLayout',
+    auth: ADMIN,
+    childRoutes: [
+      { path: 'dashboard', pageName: 'DashboardPage', auth: ADMIN },
+      { path: 'dashboard/categories', pageName: 'DashboardCategoriesPanelPage', auth: ADMIN },
     ],
   },
 ];

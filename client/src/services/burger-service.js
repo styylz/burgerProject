@@ -18,7 +18,6 @@ const BurgerService = new (class BurgerService {
   }
 
   async uploadBurger(values) {
-    console.log('1', values);
     const formData = new FormData();
     formData.append('title', values.title);
     formData.append('ingredients', JSON.stringify(values.ingredients));
@@ -32,9 +31,13 @@ const BurgerService = new (class BurgerService {
         'Content-Type': 'multipart/form-data',
       },
     });
-    console.log('2', response);
 
     return response;
+  }
+
+  async getBurgers() {
+    const { data } = await this.requester.get('/burgers');
+    return data;
   }
 })();
 

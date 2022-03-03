@@ -24,10 +24,19 @@ export const lightTheme = createTheme(theme, {
   mixins: {
     toolbar: {
       height: 64,
+
     },
     footer: {
       height: 41,
       color: '#FFFEFB',
+    },
+    drawer: {
+      width: 240,
+    },
+    transitions: {
+      duration: {
+        slow: 600,
+      },
     },
   },
   shadows: [

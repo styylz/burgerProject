@@ -17,7 +17,7 @@ const AdminProtector = ({ children }) => {
     return <Navigate to={routes.ProfilePage} />;
   }
 
-  return <>{children}</>;
+  return children;
 };
 
 export default AdminProtector;

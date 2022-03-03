@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -5,12 +6,12 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import BackgroundImageContainer from '../../containers/background-image-container';
 import StarRating from '../../stars';
 
-const BurgerGalleryCard = () => {
+const BurgerGalleryCard = ({ title, image }) => {
   console.log();
   return (
     <Grid item xs={12} sm={12} md={12} lg={4}>
       <BackgroundImageContainer sx={{
-        backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.3)), url(https://assets-global.website-files.com/5f57196756ffac822737c502/5faae813f7c784e6b99ad001_Meat%20Analogue%20Case%20Study.jpg)',
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.3)), url(${image})`,
         height: '60vh',
         display: 'flex',
         flexDirection: 'column',
@@ -67,14 +68,7 @@ const BurgerGalleryCard = () => {
               textTransform: 'uppercase',
             }}
             >
-              Lorem Burger Spicy
-            </Typography>
-            <Typography sx={{
-              color: 'white',
-              fontSize: '0.9rem',
-            }}
-            >
-              This is fairly quick burger
+              {title}
             </Typography>
           </Box>
           <Box>

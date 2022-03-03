@@ -7,8 +7,8 @@ import BurgerPageTitle from './burger-page-title';
 import BurgerGalleryCard from '../../components/cards/gallery-card';
 import BurgerPageDrawer from './burger-page-drawer';
 
-const BurgerPageGallery = ({ open, ...props }) => {
-  console.log('');
+const BurgerPageGallery = ({ open, data, ...props }) => {
+  console.log(data);
   return (
     <Container
       maxWidth="xl"
@@ -40,14 +40,14 @@ const BurgerPageGallery = ({ open, ...props }) => {
           p: 2,
         }}
       >
-        <BurgerGalleryCard />
-        <BurgerGalleryCard />
-        <BurgerGalleryCard />
-        <BurgerGalleryCard />
-        <BurgerGalleryCard />
-        <BurgerGalleryCard />
-        <BurgerGalleryCard />
-        <BurgerGalleryCard />
+        {data.map(({ title, image, id }) => (
+          <BurgerGalleryCard
+            title={title}
+            image={image}
+            key={id}
+          />
+        ))}
+
       </Grid>
       <BurgerPageDrawer drawerHandler={props} />
     </Container>

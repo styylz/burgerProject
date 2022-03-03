@@ -11,13 +11,16 @@ const getBurgers = async (req,res) => {
 }
 
 const createBurger = async (req, res) => {
-  console.log(req.file)
 
-  console.log('req.body',req.body)
-  const BurgerDoc = await BurgersModel(req.body);
+  const { IMG_FOLDER_NAME} = process.env;
+  const image = `${IMG_FOLDER_NAME}/${req.file.filename}`;
+
+  const ingredients= JSON.parse(req.body.ingredients)
+  .map(({id, ...ingredient}) => ingredient)
   try {
-    await BurgerDoc.save();
+    const BurgerDoc = await BurgersModel.create({...req.body, ingredients, image});
     const Burger = new BurgersViewModel(BurgerDoc);
+    console.log('Burger',Burger)
 
       res.status(201).json(Burger);
   } catch (error) {

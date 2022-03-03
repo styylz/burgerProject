@@ -1,4 +1,4 @@
-/*eslint-disable */
+/* eslint-disable no-nested-ternary */
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,15 +15,15 @@ import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useRef } from 'react';
 import { authSelector } from '../../../store/auth';
+import AuthService from '../../../services/auth-service';
+import routes from '../../../routing/routes';
 
 const pages = [
-  {title:"Home", link:'/'},
-  {title:"Burgers", link:'Burgers'},
-  {title:"Login", link:'/login'}
-]
-
-const settings = ['Account','Logout'];
+  { title: 'Home', link: '/' },
+  { title: 'Burgers', link: '/burgers' },
+];
 
 const StyledNavLink = styled(NavLink)(({ theme }) => ({
   color: theme.palette.common.black,
@@ -31,10 +31,10 @@ const StyledNavLink = styled(NavLink)(({ theme }) => ({
   fontWeight: '100',
   fontSize: '1.2rem',
   textDecoration: 'none',
-  transform:  0,
+  transform: 0,
   '&.active': {
     borderBottom: `1px solid ${theme.palette.common.black}`,
-    transform:  1,
+    transform: 1,
   },
 }));
 
@@ -42,21 +42,28 @@ const Navbar = () => {
   const auth = useSelector(authSelector);
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+
+  const anchorRef = useRef(null);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleLogout = () => {
+    AuthService.logout();
   };
   return (
     <AppBar position="static">
@@ -97,13 +104,13 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map(({title}) => {
-                return(
+              {pages.map(({ title }) => (
                 <MenuItem key={title} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{title}</Typography>
                 </MenuItem>
-              )})}
+              ))}
             </Menu>
+
           </Box>
           <Typography
             variant="h6"
@@ -114,7 +121,7 @@ const Navbar = () => {
             LOREM
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map(({title, link}) => (
+            {pages.map(({ title, link }) => (
               <Button
                 key={title}
                 onClick={handleCloseNavMenu}
@@ -123,36 +130,101 @@ const Navbar = () => {
                 <StyledNavLink to={link}>{title}</StyledNavLink>
               </Button>
             ))}
+            <Button>
+              {!auth.loggedIn
+                ? <StyledNavLink to="/login">Login</StyledNavLink>
+                : <StyledNavLink onClick={handleLogout} to="/">Logout</StyledNavLink>}
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton
+                onClick={handleOpen}
+                sx={{ p: 0 }}
+                ref={anchorRef}
+              >
                 <Avatar src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+
+            {auth.loggedIn
+              ? (
+                auth.user?.role === 'USER'
+                  ? (
+                    <Menu
+                      anchorEl={anchorRef.current}
+                      anchorOrigin={{
+                        horizontal: 'right',
+                        vertical: 'bottom',
+                      }}
+                      transformOrigin={{
+                        horizontal: 'right',
+                        vertical: 'top',
+                      }}
+                      open={open}
+                      onClose={handleClose}
+                    >
+                      <MenuItem onClick={handleClose}>
+                        <StyledNavLink to={routes.ProfilePage}>
+                          <Typography textAlign="center">PROFILE</Typography>
+                        </StyledNavLink>
+                      </MenuItem>
+                      <MenuItem onClick={handleLogout}>
+                        <Typography textAlign="center">LOGOUT</Typography>
+                      </MenuItem>
+                    </Menu>
+                  ) : (
+                    <Menu
+                      anchorEl={anchorRef.current}
+                      anchorOrigin={{
+                        horizontal: 'right',
+                        vertical: 'bottom',
+                      }}
+                      transformOrigin={{
+                        horizontal: 'right',
+                        vertical: 'top',
+                      }}
+                      open={open}
+                      onClose={handleClose}
+                    >
+                      <MenuItem onClick={handleClose}>
+                        <StyledNavLink to={routes.DashboardPage}>
+                          <Typography textAlign="center">DASHBOARD</Typography>
+                        </StyledNavLink>
+                      </MenuItem>
+                      <MenuItem onClick={handleLogout}>
+                        <Typography textAlign="center">LOGOUT</Typography>
+                      </MenuItem>
+                    </Menu>
+                  ))
+              : (
+                <Menu
+                  anchorEl={anchorRef.current}
+                  anchorOrigin={{
+                    horizontal: 'right',
+                    vertical: 'bottom',
+                  }}
+                  transformOrigin={{
+                    horizontal: 'right',
+                    vertical: 'top',
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>
+                    <StyledNavLink to={routes.LoginPage}>
+                      <Typography textAlign="center">LOGIN</Typography>
+                    </StyledNavLink>
+                  </MenuItem>
+                  <MenuItem onClick={handleClose}>
+                    <StyledNavLink to={routes.SignUpPage}>
+                      <Typography textAlign="center">REGISTER</Typography>
+                    </StyledNavLink>
+                  </MenuItem>
+                </Menu>
+              )}
+
           </Box>
         </Toolbar>
       </Container>

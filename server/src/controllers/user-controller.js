@@ -3,7 +3,9 @@ const UserViewModel = require('../view-models/user-view-model');
 
 const getUsers = async (req, res) => {
   const userDocs = await UserModel.find();
+  console.log(userDocs)
   const users = userDocs.map(userDoc => new UserViewModel(userDoc));
+  console.log(users)
   res.status(200).json({ users });
 };
 

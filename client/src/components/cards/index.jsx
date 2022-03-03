@@ -15,7 +15,7 @@ const CardImage = styled(Box)(() => ({
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   objectFit: 'contain',
-  width: '250px',
+  width: '20vw',
   height: '200px',
 }));
 

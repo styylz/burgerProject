@@ -5,8 +5,8 @@ import React from 'react';
 const Circle = styled(Box)(({ theme }) => ({
   padding: theme.spacing(1),
   borderRadius: '50%',
-  width: '200px ',
-  height: '200px ',
+  width: 'calc(100vw / 6.5)',
+  height: 'calc(100vw / 6.5)',
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   objectFit: 'contain',
