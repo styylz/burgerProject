@@ -16,7 +16,6 @@ import { useFormik } from 'formik';
 import Api from '../../../services/api-service';
 import MultipleSelectGroup from './multipleSelectGroup';
 import BurgerService from '../../../services/burger-service';
-import parse from 'html-react-parser';
 
 let id = 0;
 const createId = () => {
@@ -131,9 +130,7 @@ const Dashboard = () => {
     })();
   }, []);
 
-  const test = parse(`<Box>hi</Box> <h2> hi </h2> <h3> hi </h3>`); // React.createElement('p', {}, 'Hello, World!')
 
-  console.log(burgers)
   return (
     <Box
       component="form"

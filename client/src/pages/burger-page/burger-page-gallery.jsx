@@ -7,52 +7,49 @@ import BurgerPageTitle from './burger-page-title';
 import BurgerGalleryCard from '../../components/cards/gallery-card';
 import BurgerPageDrawer from './burger-page-drawer';
 
-const BurgerPageGallery = ({ open, data, ...props }) => {
-  console.log(data);
-  return (
-    <Container
-      maxWidth="xl"
-    >
-      <Box sx={{ display: 'flex' }}>
-        <BurgerPageTitle />
-        <Box sx={{
-          width: ' 70%',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'flex-end',
-          margin: 'auto',
-        }}
-        >
-          <Button onClick={open}>
-            <FilterAltIcon sx={{
-              color: 'black',
-              opacity: '0.8',
-              fontSize: '2.2rem',
-            }}
-            />
-          </Button>
-        </Box>
-      </Box>
-      <Grid
-        container
-        spacing={2}
-        sx={{
-          p: 2,
-        }}
+const BurgerPageGallery = ({ open, data, ...props }) => (
+  <Container
+    maxWidth="xl"
+  >
+    <Box sx={{ display: 'flex' }}>
+      <BurgerPageTitle />
+      <Box sx={{
+        width: ' 70%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        margin: 'auto',
+      }}
       >
-        {data.map(({ title, image, id }) => (
-          <BurgerGalleryCard
-            title={title}
-            image={image}
-            key={id}
+        <Button onClick={open}>
+          <FilterAltIcon sx={{
+            color: 'black',
+            opacity: '0.8',
+            fontSize: '2.2rem',
+          }}
           />
-        ))}
+        </Button>
+      </Box>
+    </Box>
+    <Grid
+      container
+      spacing={2}
+      sx={{
+        p: 2,
+      }}
+    >
+      {data?.map((burger) => (
+        <BurgerGalleryCard
+          title={burger.title}
+          image={burger.image}
+          key={burger.id}
+          id={burger.id}
+        />
+      ))}
+    </Grid>
+    <BurgerPageDrawer drawerHandler={props} />
+  </Container>
 
-      </Grid>
-      <BurgerPageDrawer drawerHandler={props} />
-    </Container>
-
-  );
-};
+);
 
 export default BurgerPageGallery;

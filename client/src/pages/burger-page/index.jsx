@@ -6,17 +6,15 @@ import BurgerPageGallery from './burger-page-gallery';
 
 const BurgerPage = () => {
   const [burgers, setBurgers] = useState([]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
     (async () => {
       const Burgers = await BurgerService.getBurgers();
       setBurgers(Burgers);
-      console.log(Burgers);
     })();
   }, []);
 
-  console.log('burger', burgers);
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const openDrawer = () => setDrawerOpen(true);
   const closeDrawer = () => setDrawerOpen(false);
   return (

@@ -39,6 +39,11 @@ const BurgerService = new (class BurgerService {
     const { data } = await this.requester.get('/burgers');
     return data;
   }
+
+  async getBurger(id) {
+    const { data } = await this.requester.get(`/burgers/${id}`);
+    return data;
+  }
 })();
 
 export default BurgerService;

@@ -1,30 +1,29 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 
-const RecipePageTitle = () => (
-  <Box sx={{ pr: '15vw', pt: 5 }}>
-    <Typography
-      sx={{
-        fontSize: {
-          xs: '1.1rem',
-          sm: '1.5rem',
-          lg: '2.3rem',
-        },
-        textTransform: 'uppercase',
-      }}
+const RecipePageTitle = ({ title }) => {
+  console.log(title?.title);
+  return (
+    <Box sx={{
+      pr: '15vw',
+      pt: 5,
+    }}
     >
-      Lorem burger spicy
-    </Typography>
-    <Typography
-      sx={{
-        fontSize: '1.2rem',
-        textTransform: 'uppercase',
-      }}
-    >
-      Difficulty: crazy
+      <Typography
+        sx={{
+          fontSize: {
+            xs: '1.1rem',
+            sm: '1.5rem',
+            lg: '2.3rem',
+          },
+          textTransform: 'uppercase',
+        }}
+      >
+        {title?.title}
+      </Typography>
 
-    </Typography>
-  </Box>
-);
+    </Box>
+  );
+};
 
 export default RecipePageTitle;

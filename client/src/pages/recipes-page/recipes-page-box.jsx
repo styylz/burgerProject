@@ -1,13 +1,16 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 
-const RecipesPageBox = ({ children, properties, title }) => (
+const RecipesPageBox = ({
+  children, properties, title, usePadding,
+}) => (
   <Box sx={{
+    padding: usePadding ? '4%' : '0px',
     backgroundColor: 'white',
     width: {
       xs: '60vw',
       md: '50vw',
-      lg: '25vw',
+      lg: '29vw',
 
     },
     marginTop: '90px',
@@ -36,7 +39,12 @@ const RecipesPageBox = ({ children, properties, title }) => (
       </Typography>
     </Box>
     <Box sx={{
-      display: 'flex', width: '100%', flexDirection: 'column', minHeight: '65vh', justifyContent: 'start', alignItems: 'left',
+      display: 'flex',
+      width: '100%',
+      flexDirection: 'column',
+      minHeight: '65vh',
+      justifyContent: 'start',
+      alignItems: 'left',
     }}
     >
       {children}

@@ -4,12 +4,14 @@ import React from 'react';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import BackgroundImageContainer from '../../containers/background-image-container';
+import { Link } from 'react-router-dom';
 import StarRating from '../../stars';
 
-const BurgerGalleryCard = ({ title, image }) => {
-  console.log();
+const BurgerGalleryCard = ({ title, image,  id }) => {
+  console.log('id',id);
   return (
     <Grid item xs={12} sm={12} md={12} lg={4}>
+      <Link to={`/recipe/${id}`}>
       <BackgroundImageContainer sx={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1),rgba(0, 0, 0, 0.3)), url(${image})`,
         height: '60vh',
@@ -76,7 +78,9 @@ const BurgerGalleryCard = ({ title, image }) => {
           </Box>
 
         </Box>
+
       </BackgroundImageContainer>
+      </Link>
     </Grid>
   );
 };

@@ -12,10 +12,12 @@ const getIngredients = async (req, res) => {
 }
 
 const createIngredient = async (req, res) => {
-    const IngredientDocs = await IngredientModel(req.body);
+    const { title} = req.body
+    const IngredientDoc = await IngredientModel({title});
+    console.log(title)
     try {
-        await IngredientDocs.save();
-        const Ingredients = new IngredientViewModel(IngredientDocs);
+        await IngredientDoc.save();
+        const Ingredients = new IngredientViewModel(IngredientDoc);
 
         res.status(201).json(Ingredients);
     } catch (error) {
