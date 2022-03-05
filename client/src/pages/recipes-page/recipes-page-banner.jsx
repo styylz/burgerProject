@@ -4,7 +4,6 @@ import BackgroundImageContainer from '../../components/containers/background-ima
 const RecipesBanner = ({ bannerImage }) => {
   if (bannerImage === undefined) return null;
 
-  console.log(bannerImage?.image);
   return (
     <BackgroundImageContainer
       sx={{

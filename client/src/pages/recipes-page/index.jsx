@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 // import parse from 'html-react-parser';
 import RecipesPageLG from './recipes-pageLg';
-// import RecipesPageXs from './recipes-page-mobile';
+import RecipesPageXs from './recipes-page-mobile';
 import BurgerService from '../../services/burger-service';
 
 const RecipePage = () => {
@@ -42,10 +42,11 @@ const RecipePage = () => {
         ingredients={ingredientsArray}
         sx={{ display: { xs: 'none', lg: 'block' } }}
       />
-      {/* <RecipesPageXs
-        data={burgers}
+      <RecipesPageXs
+        data={burger}
+        ingredients={ingredientsArray}
         sx={{ display: { xs: 'flex', lg: 'none' } }}
-      /> */}
+      />
     </>
 
   );

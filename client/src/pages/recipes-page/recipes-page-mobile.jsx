@@ -6,14 +6,17 @@ import RecipesPageBox from './recipes-page-box';
 import RecipesPageIngredientsList from './recipes-page-ingredients-list';
 import RecipesPageCounter from './recipes-page-counter';
 import RecipesPageTitle from './recipes-page-title';
+import transformToHtml from '../../components/helpers/transformToHtml';
 
-const RecipesPageMobile = () => (
+const RecipesPageMobile = ({ data, ingredients }) => (
   <Box sx={{
     display: { xs: 'flex', lg: 'none' },
     flexDirection: 'column',
   }}
   >
-    <RecipesBanner />
+    <RecipesBanner
+      bannerImage={data}
+    />
     <RecipesPageDetails>
       <RecipesPageTitle />
       <RecipesPageBox
@@ -32,18 +35,21 @@ const RecipesPageMobile = () => (
           <RecipesPageCounter />
 
         </Box>
-        <RecipesPageIngredientsList />
+        <RecipesPageIngredientsList
+          ingredients={ingredients}
+        />
       </RecipesPageBox>
-      <RecipesPageBox title="Directions" />
-      <Box sx={{
-        mt: 5,
-        pl: 20,
-      }}
+      <RecipesPageBox
+        title="Directions"
+        usePadding
       >
-        <Typography sx={{ fontSize: '1.5rem' }}>
-          copy link & send to friends
-        </Typography>
-      </Box>
+        <Box>
+          {transformToHtml(data?.steps)}
+        </Box>
+      </RecipesPageBox>
+      <Typography sx={{ fontSize: '1.5rem' }}>
+        copy link & send to friends
+      </Typography>
     </RecipesPageDetails>
   </Box>
 );
