@@ -1,6 +1,5 @@
 import { Box, Container, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
-
 import CategoriesPanelPageForm from './categories-panel-page-form';
 import CategoriesPanelPageTable from './categories-panel-page-table';
 import Api from '../../../../services/api-service';
@@ -10,6 +9,8 @@ const CategoryPanelPage = () => {
   const [categories, setCategories] = useState([]);
   const [titleField, setTitleField] = useState('');
   const [editedCategoryId, setEditedCategoryId] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const [page, setPage] = React.useState(0);
 
   const createCategory = async () => {
     const createdCategory = await CategoriesService.createCategory({ title: titleField });
@@ -60,6 +61,10 @@ const CategoryPanelPage = () => {
     else createCategory();
   };
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
   useEffect(() => {
     (async () => {
       const fetchedCategories = await Api.getCategories();
@@ -86,6 +91,7 @@ const CategoryPanelPage = () => {
         categories={categories.map((x) => ({ ...x, edited: editedCategoryId === x.id }))}
         onDelete={deleteCategory}
         onEdit={editCategory}
+        onChangePage={handleChangePage}
       />
 
     </Container>

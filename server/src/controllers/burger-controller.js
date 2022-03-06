@@ -4,6 +4,11 @@ const IngredientModel = require('../models/ingredient-model');
 const IngredientViewModel = require('../view-models/ingredient-view-model');
 
 const getBurgers = async (req, res) => {
+  const page = req.query._page
+  const limit = req.query._limit
+  const startIndex = (page - 1) * limit
+  const endIndex = page * limit
+
   const BurgerDocs = await BurgersModel.find()
     .populate('category')
 
@@ -20,8 +25,9 @@ const getBurgers = async (req, res) => {
     }))
   );
 
-  console.log('populated', populatedBurgers)
-  res.status(200).json(populatedBurgers)
+  const result = populatedBurgers.slice(startIndex, endIndex)
+
+  res.status(200).json(result)
 }
 
 const createBurger = async (req, res) => {
@@ -51,7 +57,6 @@ const getBurger = async (req, res) => {
   const { id } = req.params
   const BurgerDoc = await BurgersModel.findById(id)
     .populate('category')
-
   const Burger = new BurgersViewModel(BurgerDoc)
   const populatedBurger = {
     ...Burger,

@@ -10,6 +10,7 @@ import {
   tableCellClasses,
   Button,
   styled,
+  TablePagination,
 } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
@@ -26,17 +27,20 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const CategoriesPanelPageTable = ({ categories, onDelete, onEdit }) => {
+const CategoriesPanelPageTable = ({
+  categories, onDelete, onEdit, onChangePage,
+}) => {
   const handleCategoryDelete = async (id) => {
     const deletedCategory = await CategoriesService.deleteCategory(id);
 
     if (typeof deletedCategory === 'string') {
-      console.error(deletedCategory);
       return;
     }
-
     onDelete(id);
   };
+
+  console.log(onChangePage);
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -80,6 +84,15 @@ const CategoriesPanelPageTable = ({ categories, onDelete, onEdit }) => {
           ))}
         </TableBody>
       </Table>
+      <TablePagination
+        rowsPerPageOptions={-1}
+        component="div"
+        count={-1}
+        rowsPerPage={1}
+        page={0}
+        onPageChange={onChangePage}
+        // onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </TableContainer>
   );
 };

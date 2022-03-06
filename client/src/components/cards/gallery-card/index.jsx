@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import StarRating from '../../stars';
 
 const BurgerGalleryCard = ({ title, image,  id }) => {
-  console.log('id',id);
   return (
     <Grid item xs={12} sm={12} md={12} lg={4}>
       <Link to={`/recipe/${id}`}>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { appendUrlParams } from '../components/helpers/url-helpers';
 import AuthService from './auth-service';
 
 const BurgerService = new (class BurgerService {
@@ -35,8 +36,11 @@ const BurgerService = new (class BurgerService {
     return response;
   }
 
-  async getBurgers() {
-    const { data } = await this.requester.get('/burgers');
+  async getBurgers(params) {
+    const requestUrl = 'http://localhost:5000/api/burgers?';
+    const generatedParams = appendUrlParams(requestUrl, params);
+    console.log(generatedParams);
+    const { data } = await this.requester.get(generatedParams);
     return data;
   }
 
