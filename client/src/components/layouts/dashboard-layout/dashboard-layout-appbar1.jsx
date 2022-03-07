@@ -5,7 +5,6 @@ import Navbar from '../../partials/navbar';
 const DashboardLayoutAppBaras = styled(Navbar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
-  border: '5px solid black',
   transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,

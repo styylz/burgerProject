@@ -21,7 +21,11 @@ const AdminLayout = () => {
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
-      marginLeft: 20,
+      ml: {
+        xs: 0,
+        md: 30,
+        lg: 30,
+      },
     }}
     >
       {/* <Navbar /> */}

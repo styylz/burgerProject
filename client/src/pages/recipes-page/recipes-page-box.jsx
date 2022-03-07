@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 
 const RecipesPageBox = ({
-  children, properties, title, usePadding,
+  children, properties, title, usePadding, top, left,
 }) => (
   <Box sx={{
     padding: usePadding ? '4%' : '0px',
@@ -11,7 +11,6 @@ const RecipesPageBox = ({
       xs: '60vw',
       md: '50vw',
       lg: '29vw',
-
     },
     marginTop: '90px',
     position: 'relative',
@@ -19,17 +18,22 @@ const RecipesPageBox = ({
   }}
   >
     <Box sx={{
-      position: 'absolute', top: -50, left: -50,
+      position: 'relative',
     }}
     >
       <Typography
         component="h3"
         variant="h2"
         sx={{
+          top: `${top}`,
+          left: `${left}`,
           textTransform: 'uppercase',
+          fontWeight: 500,
+          position: 'absolute',
+          zIndex: '9999',
           fontSize: {
-            xs: '1.1rem',
-            sm: '4.5vw',
+            xs: '9.1vw',
+            sm: '7.5vw',
             lg: '3.9vw',
           },
         }}

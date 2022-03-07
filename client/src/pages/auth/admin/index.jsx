@@ -1,4 +1,4 @@
-/* eslint-disable*/
+/*eslint-disable*/
 import {
   TextField,
   Grid,
@@ -115,29 +115,49 @@ const Dashboard = () => {
   useEffect(() => {
     (async () => {
       const [fetchedCategories, fetchedIngredients] = await Promise.all([
-        Api.getCategories(),
+        Api.getCategoriesTest(),
         Api.getIngredients(),
       ]);
-      setCategories(fetchedCategories);
+      setCategories(fetchedCategories.categories);
       setIngredients(fetchedIngredients);
+      console.log('fetchedCats', fetchedCategories);
+      console.log('fetchedIngs', fetchedIngredients);
     })();
   }, []);
 
   useEffect(() => {
     (async () => {
       const burgs = await BurgerService.getBurgers();
-      setBurgers(burgs);
+      console.log(burgs)
+      setBurgers(burgs.burgers);
     })();
   }, []);
-
 
   return (
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{ width: 300, m: 'auto',}}
+      sx={{
+        width: {
+          xs: '90%',
+          sm: '60%',
+          md: '50%',
+          lg: '35%',
+        },
+        m: 'auto',
+      }}
     >
-      <Typography variant="h2" sx={{ fontSize: 25, textAlign: 'center', mb: 5 }}>Create Burger</Typography>
+      <Typography
+        variant="h2"
+        sx={{
+          fontSize: 25,
+          textAlign: 'center',
+          mb: 5,
+        }}
+      >
+        Create Burger
+
+      </Typography>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={12}>
           <TextField
@@ -212,8 +232,8 @@ const Dashboard = () => {
         <Grid item xs={12} sm={12}>
           <Button
             variant="outlined"
-            size="medium"
-            sx={{ textTransform: 'none', color: 'black', width: 300 }}
+
+            sx={{ textTransform: 'none', color: 'black', width: '100%' }}
             onClick={handleUploadFiles}
           >
             UPLOAD IMAGE
@@ -234,15 +254,13 @@ const Dashboard = () => {
             fullWidth
             variant="contained"
             color="primary"
-            sx={{ height: 56, fontWeight: 'bold', mb:5 }}
+            sx={{ height: 56, fontWeight: 'bold', mb: 5 }}
           >
             ADD BURGER
           </Button>
         </Grid>
       </Grid>
-      {burgers.map(({ image, id }) => <img style={{width: '100px', height: '100px'}} key={id} alt="alt" src={`${image}`} />)}
-      {/* <img alt="x" src="server\public\images\1646057597969-351682313.jpg" />
-      {burgers.map(({ steps }) => parse(`${steps}`) )} */}
+      {burgers.map(({ image, id }) => <img style={{ width: '100px', height: '100px' }} key={id} alt="alt" src={`${image}`} />)}
     </Box>
 
   );

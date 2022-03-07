@@ -7,10 +7,12 @@ import BackgroundImageContainer from '../../components/containers/background-ima
 const StyledLink = styled(Link)({
   textTransform: 'capitalize',
   fontWeight: '900',
-  fontSize: '1.5rem',
   textDecoration: 'none',
   color: 'white',
   transform: 0,
+  width: '100%',
+  height: '100%',
+  m: 0,
 });
 
 const HomePageBanner = () => (
@@ -33,7 +35,11 @@ const HomePageBanner = () => (
     }}
     >
       <Box sx={{
-        position: 'absolute', color: 'white', display: 'flex', alignItems: 'center', flexDirection: 'column',
+        position: 'absolute',
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
       }}
       >
         <Box sx={{ mb: 12, width: '60vw' }}>

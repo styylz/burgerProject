@@ -56,9 +56,13 @@ const HomePageBody = ({ image }) => (
       md: '60vh',
       lg: '60vh',
     },
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    mt: '5vw',
   }}
   >
-    <Box sx={{ marginBottom: 7, mt: 6 }}>
+    <Box>
       <Typography sx={{
         textTransform: 'uppercase',
         fontWeight: 'bold',
@@ -69,12 +73,10 @@ const HomePageBody = ({ image }) => (
         },
       }}
       >
-        {' '}
         Hey, Choose the best burger...
-
       </Typography>
     </Box>
-    <Box sx={{ textAlign: 'center', marginBottom: 9 }}>
+    <Box sx={{ textAlign: 'center' }}>
       <StyledInputElement placeholder="Find a recipe" endAdornment={<SearchIcon />} sx={{ textTransform: 'uppercase' }} />
 
     </Box>

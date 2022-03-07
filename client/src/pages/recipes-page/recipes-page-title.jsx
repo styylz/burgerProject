@@ -3,18 +3,23 @@ import React from 'react';
 
 const RecipePageTitle = ({ title }) => (
   <Box sx={{
-    pr: '15vw',
-    pt: 5,
+    width: '90%',
+    backgroundColor: 'orange',
+    borderRadius: '10px',
+    mt: 5,
   }}
   >
     <Typography
       sx={{
         fontSize: {
-          xs: '1.1rem',
-          sm: '1.5rem',
-          lg: '2.3rem',
+          xs: '10vw',
+          sm: '5.5vw',
+          lg: '3.9vw',
+          xl: '3vw',
         },
+        textAlign: 'center',
         textTransform: 'uppercase',
+        color: 'white',
       }}
     >
       {title?.title}

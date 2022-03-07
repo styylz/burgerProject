@@ -8,29 +8,30 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import BurgerPageTitle from './burger-page-title';
 import BurgerGalleryCard from '../../components/cards/gallery-card';
 import BurgerPageDrawer from './burger-page-drawer';
-import { useSearchParams } from 'react-router-dom';
+import BurgerCardSkeleton from '../../components/skeletons/burger-card-skeleton';
+import useSearchParamsBurger from '../../hooks/useSearchParamsBurger';
 
 const BurgerPageGallery = ({
   count, open, data, ...props
 }) => {
-  console.log('initCOunt',count)
+  console.log('initCOunt', count);
   const [loading, setLoading] = useState(true);
   const [burgersToLoad, setBurgersToLoad] = useState(3);
   const [hasMore, setHasMore] = useState(true);
-  const [searchParams, setSearchParams] = useSearchParams();
+  // eslint-disable-next-line no-unused-vars
+  const { getInitialSearchParams, setNewSearchParams } = useSearchParamsBurger();
 
-  //set init params to url
-  const getInitialSearchParams = () => {
-    if (!searchParams.get('_page') || !searchParams.get('_limit')) {
-      searchParams.set('_page', 1);
-      searchParams.set('_limit', 3);
-      setSearchParams(searchParams);
-      return { page: 1, limit: 3 };
-    }
-    return {
-      page: parseInt(searchParams.get('_page'), 10),
-      limit: parseInt(searchParams.get('_limit'), 10),
-    };
+  console.log(setNewSearchParams);
+
+  const fetchMoreData = () => {
+      const burgerCount = burgersToLoad + 3;
+      if (burgerCount >= count) {
+        setHasMore(false);
+      }
+      setNewSearchParams([
+        { key: '_limit', value: burgerCount },
+      ]);
+      setBurgersToLoad(burgerCount);
   };
 
   useEffect(() => {
@@ -40,29 +41,6 @@ const BurgerPageGallery = ({
       setLoading(false);
     }, 800);
   }, []);
-
-  const setNewSearchParams = (newSearchParams) => {
-    newSearchParams.forEach(({ keyToDelete, key, value }) => {
-      if (keyToDelete !== undefined) searchParams.delete(keyToDelete);
-      searchParams.set(key, value);
-    });
-    setSearchParams(searchParams);
-  };
-
-  const fetchMoreData = () => {
-    setTimeout(() => {
-      const burgerCount = burgersToLoad + 3;
-      if (burgerCount >= count) {
-        console.log('burgerC',burgerCount)
-        console.log('Count',burgerCount)
-        setHasMore(false);
-      }
-      setNewSearchParams([
-        { key: '_limit', value: burgerCount },
-      ]);
-      setBurgersToLoad(burgerCount);
-    }, 800);
-  };
 
   return (
     <Container
@@ -92,7 +70,7 @@ const BurgerPageGallery = ({
         dataLength={burgersToLoad}
         next={fetchMoreData}
         hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
+        loader={<BurgerCardSkeleton skeletonsAmount={3} />}
         endMessage={(
           <p style={{ textAlign: 'center' }}>
             <b>Yay! You have seen it all</b>
@@ -107,7 +85,6 @@ const BurgerPageGallery = ({
             width: '100%',
           }}
         >
-
           {data?.map((burger) => (
             <BurgerGalleryCard
               title={burger.title}

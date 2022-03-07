@@ -27,6 +27,8 @@ const RecipesPageLg = ({ data, ingredients }) => {
             alignItems: 'start',
           }}
           title="ingredients"
+          top="-2.9vw"
+          left="-7.3vw"
         >
           <Box sx={{
             height: '20vh',
@@ -42,6 +44,8 @@ const RecipesPageLg = ({ data, ingredients }) => {
         <RecipesPageBox
           title="Directions"
           usePadding
+          top="-5vw"
+          left="-7vw"
         >
           <Box
             burger={data}

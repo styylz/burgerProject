@@ -1,4 +1,5 @@
-import React from 'react';
+/*eslint-disable*/
+import React, { useEffect, useState } from 'react';
 import {
   TableContainer,
   Paper,
@@ -16,6 +17,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 import CachedIcon from '@mui/icons-material/Cached';
 import CategoriesService from './services/categories-service';
+// import BurgerCardSkeleton from '../../../../components/skeletons/burger-card-skeleton';
+import moment from 'moment';
+import useBurgerSearchPageParams from '../../../../hooks/userBurgerSearchPageParams'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,7 +32,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const CategoriesPanelPageTable = ({
-  categories, onDelete, onEdit, onChangePage,
+  categories, onDelete, onEdit, count
 }) => {
   const handleCategoryDelete = async (id) => {
     const deletedCategory = await CategoriesService.deleteCategory(id);
@@ -38,14 +42,36 @@ const CategoriesPanelPageTable = ({
     }
     onDelete(id);
   };
+  const { searchParams, setSearchParams} = useBurgerSearchPageParams();
+  const  rowsPerPage = searchParams?.limit ?? 3;
+  const  tablePage = searchParams?.page ? searchParams.page-1 : 1;
 
-  console.log(onChangePage);
+  console.log({
+    rowsPerPage,
+    tablePage,
+  })
 
-  return (
+  const handleChangeRowsPerPage = (event) => {
+    setSearchParams([
+      { keyToDelete: '_limit', key: '_limit', value:parseInt(event.target.value, 10) },
+    ]);
+  };
+
+  const handleChangePage = (_, newPage) => {
+    setSearchParams([
+      { keyToDelete: '_page', key: '_page', value: newPage +1 },
+    ]);
+  };
+
+  useEffect(() => {
+  }, [categories]);
+
+
+   return  (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
+          <TableRow >
             <StyledTableCell>Id</StyledTableCell>
             <StyledTableCell>Name</StyledTableCell>
             <StyledTableCell align="right">CreatedAt:</StyledTableCell>
@@ -56,14 +82,14 @@ const CategoriesPanelPageTable = ({
         <TableBody>
           {categories.map((burgerCat) => (
             <TableRow
-              key={burgerCat.id}
+            key={burgerCat.id}
             >
-              <StyledTableCell component="th" scope="row">
+              <StyledTableCell key={burgerCat.id} component="th" scope="row"  >
                 {burgerCat.id}
               </StyledTableCell>
-              <StyledTableCell>{burgerCat.category}</StyledTableCell>
-              <StyledTableCell align="right">{burgerCat.createdAt}</StyledTableCell>
-              <StyledTableCell align="right">{burgerCat.updatedAt}</StyledTableCell>
+              <StyledTableCell >{burgerCat.category}</StyledTableCell>
+              <StyledTableCell align="right">{moment(burgerCat.createdAt).format('LLL')}</StyledTableCell>
+              <StyledTableCell align="right">{moment(burgerCat.updatedAt).format('LLL')}</StyledTableCell>
               <StyledTableCell sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
                 <Button
                   variant="contained"
@@ -85,13 +111,14 @@ const CategoriesPanelPageTable = ({
         </TableBody>
       </Table>
       <TablePagination
-        rowsPerPageOptions={-1}
+        rowsPerPageOptions={[3, 6, 9]}
         component="div"
-        count={-1}
-        rowsPerPage={1}
-        page={0}
-        onPageChange={onChangePage}
-        // onRowsPerPageChange={handleChangeRowsPerPage}
+        count={count}
+        rowsPerPage={rowsPerPage}
+        page={tablePage}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        labelRowsPerPage="Categories Count:"
       />
     </TableContainer>
   );

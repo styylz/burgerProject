@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 import RecipesBanner from './recipes-page-banner';
 import RecipesPageDetails from './recipes-page-details-container';
@@ -18,7 +18,7 @@ const RecipesPageMobile = ({ data, ingredients }) => (
       bannerImage={data}
     />
     <RecipesPageDetails>
-      <RecipesPageTitle />
+      <RecipesPageTitle title={data} />
       <RecipesPageBox
         properties={{
           display: 'flex',
@@ -26,6 +26,8 @@ const RecipesPageMobile = ({ data, ingredients }) => (
           alignItems: 'start',
         }}
         title="ingredients"
+        top="-4.9vw"
+        left="-7.3vw"
       >
         <Box sx={{
           height: '20vh',
@@ -42,14 +44,14 @@ const RecipesPageMobile = ({ data, ingredients }) => (
       <RecipesPageBox
         title="Directions"
         usePadding
+        top="-9vw"
+        left="-11vw"
       >
         <Box>
           {transformToHtml(data?.steps)}
         </Box>
       </RecipesPageBox>
-      <Typography sx={{ fontSize: '1.5rem' }}>
-        copy link & send to friends
-      </Typography>
+
     </RecipesPageDetails>
   </Box>
 );

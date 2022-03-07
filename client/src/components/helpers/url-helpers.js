@@ -19,7 +19,7 @@ export const createUrlParamObj = (searchParams, additionParams) => {
 
 export const appendUrlParam = (name, values) => values.map((id) => `${name}=${id}`).join('&');
 
-export const appendUrlParams = (requestUrl, params) => {
+export const appendUrlParams = (requestUrl, params = {}) => {
   const paramsArray = Object.entries(params);
   return paramsArray.reduce((prevVal, [name, values]) => {
     let previous = prevVal;

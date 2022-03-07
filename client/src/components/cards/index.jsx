@@ -15,20 +15,33 @@ const CardImage = styled(Box)(() => ({
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   objectFit: 'contain',
-  width: '20vw',
+  width: '30%',
   height: '200px',
+  padding: '4vw 0',
 }));
 
 const BurgerCard = () => (
   <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-
-    <Card sx={{ display: 'flex' }}>
+    <Card sx={{
+      display: 'flex',
+      alignItems: 'center',
+    }}
+    >
       <CardImage />
-      <Box sx={{ px: 3, py: 2.5 }}>
+      <Box sx={{
+        width: '60%',
+        pl: '1vw',
+      }}
+      >
         <Box sx={{ width: '100%', mb: 5 }}>
           <Typography sx={{
             color: '#FF0F0F',
-            fontSize: '2.1rem',
+            fontSize: {
+              xs: '4vw',
+              sm: '2.5vw',
+              md: '2.5vw',
+              lg: '1.7vw',
+            },
             textTransform: 'uppercase',
           }}
           >
@@ -36,13 +49,18 @@ const BurgerCard = () => (
           </Typography>
           <Typography sx={{
             color: 'white',
-            fontSize: '1.2rem',
+            fontSize: {
+              xs: '3vw',
+              sm: '2.5vw',
+              md: '1.5vw',
+              lg: '1.2vw',
+            },
           }}
           >
             This is fairly quick burger
           </Typography>
         </Box>
-        <Box sx={{ width: '300px' }}>
+        <Box sx={{ }}>
           <StarRating />
         </Box>
       </Box>

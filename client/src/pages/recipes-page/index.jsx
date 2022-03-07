@@ -1,7 +1,5 @@
-/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-// import parse from 'html-react-parser';
 import RecipesPageLG from './recipes-pageLg';
 import RecipesPageXs from './recipes-page-mobile';
 import BurgerService from '../../services/burger-service';

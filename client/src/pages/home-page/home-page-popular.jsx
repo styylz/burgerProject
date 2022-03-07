@@ -19,8 +19,8 @@ const HomePagePopular = () => (
         textTransform: 'uppercase',
         fontWeight: 'bold',
         fontSize: {
-          xs: '1.1rem',
-          sm: '1.5rem',
+          xs: '1.3rem',
+          sm: '2.5rem',
           lg: '2.5rem',
         },
       }}

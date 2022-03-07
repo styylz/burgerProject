@@ -1,59 +1,45 @@
 /*eslint-disable*/
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-// import Api from '../../services/api-service';
+import useBurgerSearchPageParams from '../../hooks/userBurgerSearchPageParams';
 import BurgerService from '../../services/burger-service';
 import BurgerPageBanner from './burger-page-banner';
 import BurgerPageGallery from './burger-page-gallery';
+import { createUrlParamObj } from '../../components/helpers/url-helpers';
+import useSearchParamsBurger from '../../hooks/useSearchParamsBurger';
 
 const BurgerPage = () => {
   const [burgers, setBurgers] = useState([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [allBurgerCount, setAllBurgersCount] = useState(-1);
   const [searchParams] = useSearchParams();
-  const [loading, setLoading] = useState(true);
+  const { getInitialSearchParams, setNewSearchParams } = useSearchParamsBurger();
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const Burgers = await BurgerService.getBurgers();
-  //     setBurgers(Burgers);
-  //   })();
-  // }, []);
+  const openDrawer = () => setDrawerOpen(true);
+  const closeDrawer = () => setDrawerOpen(false);
 
-  const createUrlParamObj = (searchParams, additionParams) => {
-    const paramObj = {};
-    const addParam = (value, key) => {
-      if (!paramObj[key]) {
-        paramObj[key] = [value];
-      } else if (!paramObj[key].includes(value)) {
-        paramObj[key].push(value);
-      }
-    };
-    searchParams.forEach(addParam);
-    if (additionParams) {
-      additionParams.forEach(({ value, key }) => {
-        addParam(value, key);
-      });
-    }
+  useEffect(() => {
+    setTimeout(() => {
+    setNewSearchParams([
+      { key: '_page', value: 1 },
+      { key: '_limit', value: 3 },
+    ])
+  }, 500);
+  }, [])
 
-    return paramObj;
-  };
+
 
   useEffect(() => {
     (async () => {
       const params = createUrlParamObj(searchParams);
       const fetchedBurgers = await BurgerService.getBurgers(params);
-      const burgersLength = fetchedBurgers.length;
-      setBurgers(fetchedBurgers);
+      console.log('fetchedBurgers', fetchedBurgers.data)
+      const burgersLength = fetchedBurgers.dataLength;
+      setBurgers(fetchedBurgers.data);
       setAllBurgersCount(burgersLength);
-      setLoading(false);
-      // console.log('fetChedParams',fetchedBurgers)
     })();
   }, [searchParams]);
 
-  const openDrawer = () => setDrawerOpen(true);
-  const closeDrawer = () => setDrawerOpen(false);
-  console.log('allBurgersCount',allBurgerCount)
   return (
     <>
       <BurgerPageBanner />
