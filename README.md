@@ -11,8 +11,6 @@
 ## Navigate to client side
 
 $cd JUSU PAVADINIMAS
-## Install libraries
-$ npm i
 
 ## Start project
 $ npm start
