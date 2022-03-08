@@ -17,9 +17,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DoNotDisturbAltIcon from '@mui/icons-material/DoNotDisturbAlt';
 import CachedIcon from '@mui/icons-material/Cached';
 import CategoriesService from './services/categories-service';
-// import BurgerCardSkeleton from '../../../../components/skeletons/burger-card-skeleton';
 import moment from 'moment';
-import useBurgerSearchPageParams from '../../../../hooks/userBurgerSearchPageParams'
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,7 +30,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const CategoriesPanelPageTable = ({
-  categories, onDelete, onEdit, count
+  categories,
+  onDelete,
+  onEdit,
+  count,
+  rowsPerPage,
+  setRowsPerPage,
+  tablePage,
+  setTablePage
 }) => {
   const handleCategoryDelete = async (id) => {
     const deletedCategory = await CategoriesService.deleteCategory(id);
@@ -42,30 +47,14 @@ const CategoriesPanelPageTable = ({
     }
     onDelete(id);
   };
-  const { searchParams, setSearchParams} = useBurgerSearchPageParams();
-  const  rowsPerPage = searchParams?.limit ?? 3;
-  const  tablePage = searchParams?.page ? searchParams.page-1 : 1;
-
-  console.log({
-    rowsPerPage,
-    tablePage,
-  })
 
   const handleChangeRowsPerPage = (event) => {
-    setSearchParams([
-      { keyToDelete: '_limit', key: '_limit', value:parseInt(event.target.value, 10) },
-    ]);
+    setRowsPerPage(parseInt(event.target.value, 10))
   };
 
   const handleChangePage = (_, newPage) => {
-    setSearchParams([
-      { keyToDelete: '_page', key: '_page', value: newPage +1 },
-    ]);
+    setTablePage(newPage)
   };
-
-  useEffect(() => {
-  }, [categories]);
-
 
    return  (
     <TableContainer component={Paper}>

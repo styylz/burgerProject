@@ -46,6 +46,7 @@ const RecipesPageMobile = ({ data, ingredients }) => (
         usePadding
         top="-9vw"
         left="-11vw"
+        useMargin
       >
         <Box>
           {transformToHtml(data?.steps)}

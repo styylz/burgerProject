@@ -9,7 +9,6 @@ const getCategories = async (req, res) => {
 
   const categoryDocs = await CategoryModel.find();
   const categories = categoryDocs.map(Category => new CategoryViewModel(Category));
-  console.log('catDocs', categories)
 
   const result = categories.slice(startIndex, endIndex)
   res.status(200).json({
@@ -21,11 +20,9 @@ const getCategories = async (req, res) => {
 
 const createCategory = async (req, res) => {
   const categoryDoc = await CategoryModel(req.body);
-  console.log(categoryDoc)
   try {
     await categoryDoc.save();
     const category = new CategoryViewModel(categoryDoc);
-    console.log(category)
 
     res.status(201).json(category);
   } catch (error) {
@@ -56,7 +53,6 @@ const deleteCategory = async (req, res) => {
     res.status(200).json(Category);
   }
   catch (error) {
-    console.log(error.message)
     res.status(404).json({
       message: 'Produktas nerastas'
     });
@@ -86,6 +82,17 @@ const updateCategory = async (req, res) => {
   }
 };
 
+const getPaginatedCategories = async (req, res) => {
+  const { page, limit } = req.query
+
+  const category = await CategoryModel.paginate({}, { page, limit });
+  const categories = category.docs.map(Category => new CategoryViewModel(Category));
+
+  res.status(200).json({
+    data: categories,
+    dataLength: category.total,
+  });
+}
 
 module.exports = {
   getCategories,
@@ -93,4 +100,5 @@ module.exports = {
   getCategory,
   deleteCategory,
   updateCategory,
+  getPaginatedCategories
 };

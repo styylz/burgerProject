@@ -120,15 +120,12 @@ const Dashboard = () => {
       ]);
       setCategories(fetchedCategories.categories);
       setIngredients(fetchedIngredients);
-      console.log('fetchedCats', fetchedCategories);
-      console.log('fetchedIngs', fetchedIngredients);
     })();
   }, []);
 
   useEffect(() => {
     (async () => {
       const burgs = await BurgerService.getBurgers();
-      console.log(burgs)
       setBurgers(burgs.burgers);
     })();
   }, []);
@@ -260,7 +257,7 @@ const Dashboard = () => {
           </Button>
         </Grid>
       </Grid>
-      {burgers.map(({ image, id }) => <img style={{ width: '100px', height: '100px' }} key={id} alt="alt" src={`${image}`} />)}
+
     </Box>
 
   );

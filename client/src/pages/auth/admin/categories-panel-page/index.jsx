@@ -5,7 +5,8 @@ import CategoriesPanelPageForm from './categories-panel-page-form';
 import CategoriesPanelPageTable from './categories-panel-page-table';
 import Api from '../../../../services/api-service';
 import CategoriesService from './services/categories-service';
-import { useSearchParams } from 'react-router-dom';
+// import { useSearchParams } from 'react-router-dom';
+// import { createUrlParamObj } from '../../../../components/helpers/url-helpers';
 
 const CategoryPanelPage = () => {
   const [categories, setCategories] = useState([]);
@@ -13,8 +14,12 @@ const CategoryPanelPage = () => {
   const [editedCategoryId, setEditedCategoryId] = useState(null);
   const [categoriesLen, setCategoriesLength] = useState(-1)
   // eslint-disable-next-line no-unused-vars
-  const [page, setPage] = useState(0);
-  const [searchParams] = useSearchParams();
+  // const [searchParams] = useSearchParams();
+  // const [page, setPage] = useState(0);
+  // const [limit, setLimit] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(3)
+  const [tablePage, setTablePage] = useState(0)
+  const [loading, setLoading] = useState(true)
 
   const createCategory = async () => {
     const createdCategory = await CategoriesService.createCategory({ title: titleField });
@@ -65,51 +70,30 @@ const CategoryPanelPage = () => {
     else createCategory();
   };
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  // const handleChangePage = (event, newPage) => {
+  //   setPage(newPage);
+  // };
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const fetchedCategories = await Api.getCategories();
-  //     if (typeof fetchedCategories === 'string') {
-  //       console.error(fetchedCategories);
-  //       return;
-  //     }
-
-  //     setCategories(fetchedCategories);
-  //   })();
-  // }, []);
-
-  const createUrlParamObj = (searchParams, additionParams) => {
-    const paramObj = {};
-    const addParam = (value, key) => {
-      if (!paramObj[key]) {
-        paramObj[key] = [value];
-      } else if (!paramObj[key].includes(value)) {
-        paramObj[key].push(value);
-      }
-    };
-    searchParams.forEach(addParam);
-    if (additionParams) {
-      additionParams.forEach(({ value, key }) => {
-        addParam(value, key);
-      });
-    }
-
-    return paramObj;
-  };
+  const getData = async () => {
+    setLoading(true);
+    const {data, dataLength} = await Api.getCategoriesPaginated(tablePage + 1, rowsPerPage);
+    setCategories(data);
+    setCategoriesLength(dataLength);
+    setLoading(false);
+  }
 
   useEffect(() => {
-    (async () => {
-      const params = createUrlParamObj(searchParams);
-      const fetchedCategories = await Api.getCategories(params);
-      const categoriesLength = fetchedCategories.dataLength;
-      setCategories(fetchedCategories.data);
-      setCategoriesLength(categoriesLength);
-      // setLoading(false);
-    })();
-  }, [searchParams]);
+    getData()
+  }, []);
+
+  useEffect(() => {
+    getData()
+  }, [tablePage, rowsPerPage])
+
+  // (async () => {
+  //   const {data} = await Api.getCategoriesPaginated({tablePage, rowsPerPage});
+  //   setCategories(data);
+  // })();
 
   return (
     <Container maxWidth="xl">
@@ -122,14 +106,19 @@ const CategoryPanelPage = () => {
           editMode={Boolean(editedCategoryId)}
         />
       </Box>
-      <CategoriesPanelPageTable
-        categories={categories.map((x) => ({ ...x, edited: editedCategoryId === x.id }))}
-        onDelete={deleteCategory}
-        onEdit={editCategory}
-        onChangePage={handleChangePage}
-        count={categoriesLen}
-      />
-
+      {!loading ?
+         <CategoriesPanelPageTable
+         categories={categories.map((x) => ({ ...x, edited: editedCategoryId === x.id }))}
+         onDelete={deleteCategory}
+         onEdit={editCategory}
+         rowsPerPage={rowsPerPage}
+         setRowsPerPage={setRowsPerPage}
+         tablePage={tablePage}
+         setTablePage={setTablePage}
+         // onChangePage={handleChangePage}
+         count={categoriesLen}
+       /> : null
+    }
     </Container>
   );
 };

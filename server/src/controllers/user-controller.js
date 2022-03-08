@@ -3,14 +3,11 @@ const UserViewModel = require('../view-models/user-view-model');
 
 const getUsers = async (req, res) => {
   const userDocs = await UserModel.find();
-  console.log(userDocs)
   const users = userDocs.map(userDoc => new UserViewModel(userDoc));
-  console.log(users)
   res.status(200).json({ users });
 };
 
 const updateUser = async (req, res) => {
-  console.log(req.body)
   try {
     const props = Object.entries(req.body)
       .reduce((result, [name, value]) => {
@@ -42,17 +39,15 @@ const updateUser = async (req, res) => {
 
 const createUser = async (req, res) => {
   const userDoc = await UserModel(req.body);
-  console.log(userDoc)
   try {
     await userDoc.save();
     const User = new UserViewModel(userDoc);
-    console.log(User)
 
-      res.status(201).json(User);
+    res.status(201).json(User);
   } catch (error) {
-      res.status(400).json({
-          message: `Klaida: jau yra toks useris`,
-      });
+    res.status(400).json({
+      message: `Klaida: jau yra toks useris`,
+    });
   }
 };
 

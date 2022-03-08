@@ -20,18 +20,22 @@ const RecipePage = () => {
     amount: item.amount,
   }));
 
-  console.log(ingredientsArray);
   return (
     <>
       <RecipesPageLG
         data={burger}
         ingredients={ingredientsArray}
-        sx={{ display: { xs: 'none', lg: 'block' } }}
+        sx={{
+          display:
+          { xs: 'none', lg: 'block' },
+        }}
       />
       <RecipesPageXs
         data={burger}
         ingredients={ingredientsArray}
-        sx={{ display: { xs: 'flex', lg: 'none' } }}
+        sx={{
+          display: { xs: 'flex', lg: 'none' },
+        }}
       />
     </>
 

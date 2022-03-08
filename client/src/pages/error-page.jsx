@@ -12,7 +12,12 @@ const ErrorPage = () => (
     alignItems: 'center',
   }}
   >
-    <Typography sx={{ fontSize: 60 }} color="error">404: page not found</Typography>
+    <Typography
+      sx={{ fontSize: 60 }}
+      color="error"
+    >
+      404: page not found
+    </Typography>
   </Box>
 );
 

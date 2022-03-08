@@ -39,7 +39,6 @@ const BurgerService = new (class BurgerService {
   async getBurgers(params) {
     const requestUrl = 'http://localhost:5000/api/burgers?';
     const generatedParams = appendUrlParams(requestUrl, params);
-    console.log(generatedParams);
     const { data } = await this.requester.get(generatedParams);
     return data;
   }

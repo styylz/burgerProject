@@ -39,11 +39,9 @@ server.use('/api/burgers', burgerRouter)
 
 
 server.listen(SERVER_PORT, () => {
-  console.log(`puslapis veikia ant ${SERVER_DOMAIN}:${SERVER_PORT}/`);
   (async () => {
     try {
       await Mongoose.connect(DB_CONNECTION);
-      console.log('Prisijungta prie duomenų bazės');
     } catch (error) {
       console.error('Nepavyko prisijungti prie duomenų bazės');
     }

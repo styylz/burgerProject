@@ -3,15 +3,12 @@ import { useSearchParams } from 'react-router-dom';
 
 const useBurgerSearchPageParams = () => {
   const [urlParams, setUrlParams] = useSearchParams();
-  console.log('Persikrove komponentas');
-
   const getInitialSearchParams = () => ({
     page: parseInt(urlParams.get('_page'), 10),
     limit: parseInt(urlParams.get('_limit'), 10),
   });
 
   const setSearchParams = (newSearchParams) => {
-    console.log(newSearchParams);
     newSearchParams.forEach(({ keyToDelete, key, value }) => {
       if (keyToDelete !== undefined) urlParams.delete(keyToDelete);
       urlParams.set(key, value);

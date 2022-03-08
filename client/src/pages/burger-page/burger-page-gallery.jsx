@@ -14,14 +14,12 @@ import useSearchParamsBurger from '../../hooks/useSearchParamsBurger';
 const BurgerPageGallery = ({
   count, open, data, ...props
 }) => {
-  console.log('initCOunt', count);
   const [loading, setLoading] = useState(true);
   const [burgersToLoad, setBurgersToLoad] = useState(3);
   const [hasMore, setHasMore] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const { getInitialSearchParams, setNewSearchParams } = useSearchParamsBurger();
 
-  console.log(setNewSearchParams);
 
   const fetchMoreData = () => {
       const burgerCount = burgersToLoad + 3;

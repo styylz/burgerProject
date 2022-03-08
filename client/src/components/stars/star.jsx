@@ -11,7 +11,7 @@ const Star = ({ selected = false, onSelect, }) => {
           sx={{
             color: 'orange',
             fontSize: {
-              xs: '6vw',
+              xs: '5vw',
               sm: '3vw',
               lg: '1.5vw',
             },
@@ -21,7 +21,7 @@ const Star = ({ selected = false, onSelect, }) => {
       ) : <StarOutlineIcon  sx={{
         color: 'white',
         fontSize: {
-          xs: '6vw',
+          xs: '5vw',
           sm: '3vw',
           lg: '1.5vw',
         },

@@ -17,14 +17,32 @@ const RecipesPageIngredientsList = ({ ingredients }) => {
           sx={{
             margin: 0,
             padding: '2% 20% 0% 20%',
+
           }}
         >
           <ListItemText
-            primaryTypographyProps={{ fontSize: '1.4rem' }}
+            primaryTypographyProps={{
+              fontSize: {
+                xs: '4.5vw',
+                sm: '3vw',
+                md: '2vw',
+                lg: '1.3vw',
+                xl: '1.3vw',
+              },
+            }}
           >
             {`${title}`}
           </ListItemText>
-          <Typography sx={{ fontSize: '1.4rem' }}>
+          <Typography sx={{
+            fontSize: {
+              xs: '4.5vw',
+              sm: '3vw',
+              md: '2vw',
+              lg: '1.3vw',
+              xl: '1.3vw',
+            },
+          }}
+          >
             {amount}
           </Typography>
         </ListItem>

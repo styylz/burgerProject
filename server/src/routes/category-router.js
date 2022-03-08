@@ -2,9 +2,10 @@ const express = require('express');
 const {
   getCategories,
   createCategory,
-   getCategory,
-   deleteCategory,
-   updateCategory,
+  getCategory,
+  deleteCategory,
+  updateCategory,
+  getPaginatedCategories,
 } = require('../controllers/category-controller')
 
 const router = express.Router();
@@ -12,6 +13,8 @@ const router = express.Router();
 // middlewares
 
 router.get('/', getCategories);
+
+router.get('/paginate', getPaginatedCategories);
 
 router.post('/', createCategory)
 

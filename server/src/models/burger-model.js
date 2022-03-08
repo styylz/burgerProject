@@ -1,6 +1,7 @@
 const Mongoose = require('mongoose');
 const Schema = Mongoose.Schema
 const uniqueValidator = require('mongoose-unique-validator');
+const mongoosePaginate = require('mongoose-paginate');
 
 const burgerSchema = new Schema({
   title: {
@@ -17,12 +18,12 @@ const burgerSchema = new Schema({
     }
   ],
   category:
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Category',
-    },
+  {
+    type: Schema.Types.ObjectId,
+    ref: 'Category',
+  },
 
-  image:{
+  image: {
     type: 'string',
     required: false
   },
@@ -37,11 +38,12 @@ const burgerSchema = new Schema({
   },
 
 },
-{
-  timestamps: true,
-});
+  {
+    timestamps: true,
+  });
 
 burgerSchema.plugin(uniqueValidator);
+burgerSchema.plugin(mongoosePaginate);
 
 const BurgersModel = Mongoose.model('Burger', burgerSchema);
 

@@ -42,7 +42,7 @@ const HomePageBanner = () => (
         flexDirection: 'column',
       }}
       >
-        <Box sx={{ mb: 12, width: '60vw' }}>
+        <Box sx={{ mb: 5, width: '60vw' }}>
           <Typography
             variant="h5"
             sx={{
@@ -65,7 +65,7 @@ const HomePageBanner = () => (
         <Box>
           <Button
             sx={{
-              width: '20vw',
+              width: '25vw',
               fontSize: {
                 xs: '3vw',
                 sm: '2.5vw',

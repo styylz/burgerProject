@@ -1,11 +1,11 @@
-const ImageModel = require ('../models/image-model.js')
-const UserModel = require ('../models/user-model.js')
+const ImageModel = require('../models/image-model.js')
+const UserModel = require('../models/user-model.js')
 const ImageViewModel = require('../view-models/image-view-model.js')
-const { deleteFile } = require ('../helpers/file-helpers.js')
+const { deleteFile } = require('../helpers/file-helpers.js')
 
- const getImages = async (req, res) => {
+const getImages = async (req, res) => {
   //  const userDoc = await UserModel.findOne();
-   const imageDocs = await ImageModel.find();
+  const imageDocs = await ImageModel.find();
 
   const images = imageDocs.map(x => new ImageViewModel(x));
 
@@ -14,9 +14,8 @@ const { deleteFile } = require ('../helpers/file-helpers.js')
   });
 };
 
- const uploadImages = async (req, res) => {
+const uploadImages = async (req, res) => {
   // const userDoc = await UserModel.findOne();
-  console.log(req.files)
   const imgData = req.files.map(({ filename }) => ({
     src: filename,
     // user: userDoc.id,
@@ -30,7 +29,7 @@ const { deleteFile } = require ('../helpers/file-helpers.js')
   });
 }
 
- const deleteImage = async (req, res) => {
+const deleteImage = async (req, res) => {
   const { id } = req.params;
   try {
     const imageDoc = await ImageModel.findById(id);
@@ -48,14 +47,13 @@ const { deleteFile } = require ('../helpers/file-helpers.js')
 
 
   } catch (error) {
-    console.log(error);
     res.status(404).send({
       message: 'Photo not found',
     });
   }
 }
 
-module.exports ={
+module.exports = {
   getImages,
   uploadImages,
   deleteImage,

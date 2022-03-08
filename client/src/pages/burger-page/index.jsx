@@ -1,7 +1,6 @@
 /*eslint-disable*/
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import useBurgerSearchPageParams from '../../hooks/userBurgerSearchPageParams';
 import BurgerService from '../../services/burger-service';
 import BurgerPageBanner from './burger-page-banner';
 import BurgerPageGallery from './burger-page-gallery';
@@ -27,18 +26,17 @@ const BurgerPage = () => {
   }, 500);
   }, [])
 
-
-
   useEffect(() => {
     (async () => {
       const params = createUrlParamObj(searchParams);
       const fetchedBurgers = await BurgerService.getBurgers(params);
-      console.log('fetchedBurgers', fetchedBurgers.data)
       const burgersLength = fetchedBurgers.dataLength;
       setBurgers(fetchedBurgers.data);
       setAllBurgersCount(burgersLength);
     })();
   }, [searchParams]);
+
+
 
   return (
     <>

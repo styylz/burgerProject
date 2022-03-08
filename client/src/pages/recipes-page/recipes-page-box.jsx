@@ -2,7 +2,13 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 
 const RecipesPageBox = ({
-  children, properties, title, usePadding, top, left,
+  children,
+  properties,
+  title,
+  usePadding,
+  top,
+  left,
+  useMargin,
 }) => (
   <Box sx={{
     padding: usePadding ? '4%' : '0px',
@@ -14,6 +20,7 @@ const RecipesPageBox = ({
     },
     marginTop: '90px',
     position: 'relative',
+    marginBottom: useMargin ? '8vw' : '0px',
     ...properties,
   }}
   >

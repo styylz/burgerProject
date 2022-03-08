@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
   const { email, password, repeatPassword, name, surname } = req.body;
-  console.log({email, password, repeatPassword, name, surname})
   try {
     if (password !== repeatPassword) throw new Error('Passwords do not match');
     const userDoc = await UserModel.create({
@@ -51,7 +50,6 @@ const login = async (req, res) => {
     }
 
   } catch (error) {
-    console.log(error);
     res.status(404).json({ message: 'Email is not found' });
   }
 };

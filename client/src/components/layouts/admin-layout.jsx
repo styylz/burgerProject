@@ -14,9 +14,7 @@ const AdminLayout = () => {
 
   const handleDrawerToggle = () => setOpen(!open);
   const theme = useTheme();
-  const containerWidth = `calc(100vw - ${theme.mixins.drawer.width}px)`;
 
-  console.log(containerWidth);
   return (
     <Box sx={{
       display: 'flex',

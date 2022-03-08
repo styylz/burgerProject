@@ -42,6 +42,7 @@ const BurgerGalleryCard = ({ title, image,  id }) => {
           >
             <FavoriteBorderIcon sx={{
               fontSize: '2rem',
+              ml: 3
             }}
             />
           </Box>
@@ -65,7 +66,13 @@ const BurgerGalleryCard = ({ title, image,  id }) => {
           <Box sx={{ width: '100%', mb: 4 }}>
             <Typography sx={{
               color: '#FF0F0F',
-              fontSize: '1.4rem',
+              fontSize: {
+                xs: '4.5vw',
+                sm: '3vw',
+                md: '2.9vw',
+                lg: '2vw',
+                xl: '1.1vw'
+              },
               textTransform: 'uppercase',
             }}
             >

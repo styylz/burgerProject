@@ -49,7 +49,15 @@ const createBurger = async () => {
 const getCategoriesTest = async () => {
   try {
     const response = await instance.get('/categories');
-    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+const getCategoriesPaginated = async (page, limit) => {
+  try {
+    const response = await instance.get('/categories/paginate', { params: { page, limit } });
     return response.data;
   } catch (error) {
     return error;
@@ -62,6 +70,7 @@ const Api = {
   getIngredients,
   createBurger,
   getCategoriesTest,
+  getCategoriesPaginated,
 };
 
 export default Api;
